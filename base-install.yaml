@@ -6,12 +6,11 @@ volumes:
 
 networks:
   frontend:
-    # uncomment the line below if the network already exists
-    # external: true
   backend:
 
 services:
   npm-app:
+    container_name: nginx_proxy_manager
     image: jc21/nginx-proxy-manager:latest
     restart: always
     ports:
@@ -32,6 +31,7 @@ services:
       - backend
 
   npm-db:
+    container_name: nginx_database
     image: jc21/mariadb-aria:latest
     restart: always
     environment:
