@@ -1,9 +1,13 @@
 version: "3.8"
 
-# Create a volume for portainer
+# Create volumes for NPM and Portainer
 volumes:
   portainer_data:
     name: portainer_data
+  npm_data:
+    name: npm_data
+  npm_certificates:
+    name: npm_certificates
 
 # Create frontend and backend networks
 networks:
@@ -12,16 +16,19 @@ networks:
   backend:
     name: backend
 
-# Create Nginx Proxy Manager and Portainer containers
+# Create NPM and Portainer containers
 services:
   nginx_proxy_manager:
     container_name: nginx_proxy_manager
     image: jc21/nginx-proxy-manager:latest
     restart: always
     ports:
-      - "80:80"
-      - "81:81"
-      - "443:443"
+      - "80:80" #HTTP port -- optional
+      - "81:81" #Admin port
+      - "443:443" #HTTPS port
+    volumes:
+      - npm_data:/data
+      - npm_certificates:/etc/letsencrypt
     networks:
       - frontend
       - backend
@@ -30,8 +37,8 @@ services:
     image: portainer/portainer-ce:latest
     restart: always
     ports:
-      - "8000:8000"
-      - "9443:9443"
+      - "8000:8000" #Portainer Edge Agent port -- optional
+      - "9443:9443" #HTTPS port
     volumes:
       - portainer_data:/data
       - /var/run/docker.sock:/var/run/docker.sock
