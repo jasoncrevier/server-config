@@ -1,15 +1,17 @@
-version: "3"
-volumes:
-  npm-data:
-  npm-ssl:
-  npm-db:
+version: "3.8"
 
+# Create a volume for portainer
+volumes:
+  portainer_data:
+
+# Create frontend and backend networks
 networks:
   frontend:
   backend:
 
+# Create Nginx Proxy Manager and Portainer containers
 services:
-  npm-app:
+  nginx_proxy_manager:
     container_name: nginx_proxy_manager
     image: jc21/nginx-proxy-manager:latest
     restart: always
@@ -17,29 +19,18 @@ services:
       - "80:80"
       - "81:81"
       - "443:443"
-    environment:
-      - DB_MYSQL_HOST=npm-db
-      - DB_MYSQL_PORT=3306
-      - DB_MYSQL_USER=npm
-      - DB_MYSQL_PASSWORD=replace-with-secure-password
-      - DB_MYSQL_NAME=npm
-    volumes:
-      - npm-data:/data
-      - npm-ssl:/etc/letsencrypt
     networks:
       - frontend
       - backend
-
-  npm-db:
-    container_name: nginx_database
-    image: jc21/mariadb-aria:latest
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:latest
     restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=replace-with-secure-password
-      - MYSQL_DATABASE=npm
-      - MYSQL_USER=npm
-      - MYSQL_PASSWORD=replace-with-secure-password
+    ports:
+      - "8000:8000"
+      - "9443:9443"
     volumes:
-      - npm-db:/var/lib/mysql
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      - backend
+    - backend
