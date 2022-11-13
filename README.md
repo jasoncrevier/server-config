@@ -1,7 +1,45 @@
 # Server config
-Docker compose files for services I like. They're designed to be modular. Start with with the base install and then install any other containers you like.
+Basic Ubuntu server setup guide and Docker compose files for services I like. Start with with the basic server setup, install the base install compose stack, and then install any other containers you like.
 
-## Base install
+## Basic Ubuntu server setup
+This guide assumes you have a fresh Ubuntu server installed. At the time of writing, I'm using Ubuntu server 22.10. Most of this will work on other Linux distributions, but you'll need to adapt it for your package manager / general setup.
+
+### Create a non-root user
+First, add a user:
+```bash
+$ adduser USER
+```
+Then, add that user to the sudo group:
+```bash
+usermod -aG sudo USER
+```
+The -aG option appends the user to the chosen group (sudo).
+
+### Disable logging in as root
+On the remote server, edit `/etc/ssh/sshd_config` and set `PermitRootLogin` to `no`
+
+### Set up SSH keys
+**Generate and upload keys**
+On your local machine, run the ssh-keygen command:
+```bash
+ssh-keygen -t rsa -b 4096 -f /PATH/TO/KEYS
+```
+The -t option lets you specify the type of key (RSA). The -b option lets you specify the number of bits in the key (4096). The -f option lets you set the location to save the keys.
+
+Then, run the ssh-copy-id command to copy your public key to the remote server:
+```bash
+ssh-copy-id -i /PATH/TO/KEYS username@remote_host
+```
+The -i option lets you specify the location of the key. Use it if your keys are not in the default location.
+
+### Turn off password authentication
+On the remote server, edit `/etc/ssh/sshd_config` and set `PasswordAuthentication` to `no`
+
+### Set up the firewall
+
+==TO DO==
+
+## Base install compose stack
 Contains a compose file that sets up Nginx Proxy Manager and Portainer; a good starting point for server if you want to manage adding additional containers through a GUI.
 
 ## More to come

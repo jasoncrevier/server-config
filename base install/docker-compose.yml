@@ -23,9 +23,9 @@ services:
     image: jc21/nginx-proxy-manager:latest
     restart: always
     ports:
-      - "80:80" #HTTP port -- optional
-      - "81:81" #Admin port
-      - "443:443" #HTTPS port
+      - "80:80" # HTTP port -- optional
+      - "81:81" # Admin port
+      - "443:443" # HTTPS port
     volumes:
       - npm_data:/data
       - npm_certificates:/etc/letsencrypt
@@ -37,10 +37,10 @@ services:
     image: portainer/portainer-ce:latest
     restart: always
     ports:
-      - "8000:8000" #Portainer Edge Agent port -- optional
-      - "9443:9443" #HTTPS port
+      - "8000:8000" # Portainer Edge Agent port -- optional
+      - "9443:9443" # HTTPS port
     volumes:
       - portainer_data:/data
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock # Allows Portainer to connect to the Docker API
     networks:
-    - backend
+      - backend
