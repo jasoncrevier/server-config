@@ -1,0 +1,17 @@
+version: "3.8"
+
+# Define networks
+networks:
+  frontend:
+    external: true #This network exists because we created it with the base install
+
+# Create libreddit container
+services:
+  libreddit:
+    container_name: libreddit
+    image: spikecodes/libreddit:latest
+    restart: always
+    ports:
+      - "8181:8080" #The default port 8080 conflicts with another container. Change this from 8181 to whatever you like, just remember to use the same one in NPM
+    networks:
+      - frontend

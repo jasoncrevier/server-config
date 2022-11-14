@@ -1,13 +1,16 @@
 version: "3.8"
 
+# Define networks
 networks:
   frontend:
-    external: true
+    external: true #This network exists because we created it with the base install
 
+#Define volumes
 volumes:
   nextcloud_aio_mastercontainer:
     name: nextcloud_aio_mastercontainer # This line is not allowed to be changed
 
+# Create nextcloud-aid container
 services:
   nextcloud:
     image: nextcloud/all-in-one:latest
