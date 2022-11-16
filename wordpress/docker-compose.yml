@@ -1,0 +1,58 @@
+version: "3.8"
+
+# Define networks
+networks:
+  frontend:
+    external: true #This network exists because we created it with the base install
+  backend:
+    external: true #This network exists because we created it with the base install
+
+# Define volumes
+volumes:
+  wordpress_data:
+    name: wordpress_data
+  wordpress_db:
+    name: wordpress_db
+
+# Create wordpress, wordpress_db, and phpmyadmin containers
+services:
+  wordpress:
+    container_name: wordpress
+    depends_on:
+      - wordpress_db
+    image: wordpress:latest
+    restart: always
+    # ports:
+      # - "8080:80" # Not required if using the base install
+    networks:
+      - frontend
+    volumes:
+      - wordpress_data:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: wordpress_db:3306
+      WORDPRESS_DB_USER: my_wp_user
+      WORDPRESS_DB_PASSWORD: my_wp_user_password
+      WORDPRESS_DB_NAME: my_wp_database
+  wordpress_db:
+    container_name: wordpress_db
+    image: mysql:latest
+    restart: always
+    networks:
+      - backend
+    volumes:
+      - wordpress_db:/var/lib/mysql
+    MYSQL_DATABASE: exampledb
+      MYSQL_ROOT_PASSWORD: my_password_1234789
+      MYSQL_DATABASE: my_wp_database
+      MYSQL_USER: my_wp_user
+      MYSQL_PASSWORD: my_wp_user_password
+  phpmyadmin:
+    depends_on:
+      - wordpress_db
+    image: phpmyadmin:latest
+    restart: always
+    # ports:
+      # - "8080:80" # Not required if using the base install
+    environment:
+      PMA_HOST: wordpress_database
+      MYSQL_ROOT_PASSWORD: my_password_1234789

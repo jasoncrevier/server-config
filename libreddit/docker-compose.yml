@@ -12,6 +12,6 @@ services:
     image: spikecodes/libreddit:latest
     restart: always
     ports:
-      - "8181:8080" #The default port 8080 conflicts with another container. Change this from 8181 to whatever you like, just remember to use the same one in NPM
+      # - "8080:8080" # Not required if using the base install
     networks:
       - frontend
