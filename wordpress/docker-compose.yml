@@ -26,6 +26,7 @@ services:
       # - "8080:80" # Not required if using the base install
     networks:
       - frontend
+      - backend
     volumes:
       - wordpress_data:/var/www/html
     environment:
@@ -56,6 +57,7 @@ services:
       # - "8080:80" # Not required if using the base install
     networks:
       - frontend
+      - backend
     environment:
-      PMA_HOST: wordpress_database
+      PMA_HOST: wordpress_db
       MYSQL_ROOT_PASSWORD: my_password_1234789
