@@ -7,7 +7,6 @@ This guide assumes you have a fresh Ubuntu server installed. At the time of writ
 ## Create a non-root user and disable logging in as root
 It's a good idea to create a new user, give them root privileges, and disable logging in as root. That way, if someone does manage to gain access to your server, they still need your password to run anything as root. Here's how:
 
-
 ### Set up a new user
 First, add a user (replace USER with the username you want):
 ```bash
@@ -48,9 +47,59 @@ On the remote server, edit `/etc/ssh/sshd_config` and set `PasswordAuthenticatio
 
 ==TO DO==
 
-## Add a swap file
+## Add swap space
+This step is optional. I've found that some servers with low memory can start to crash without a swap file, so try adding one if you're getting timeout errors or other crashes.
 
-==TO DO==
+Swap space is a chunk of harddrive space that the system can use when it runs out of RAM. It's slower than RAM, but it acts as a safeguard if your system runs out of RAM. Here's how to add a swap file:
+
+### Check if you already have swap space allocated
+Run this command:
+```bash
+sudo swapon --show
+```
+If nothing happens, then your system does not currently have swap space.
+
+### Check if you have enough harddrive space
+Run this command:
+```bash
+df -h
+```
+You'll see something like this:
+```bash
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs            97M  1.5M   95M   2% /run
+/dev/sda1        49G  6.4G   42G  14% / # This is the harddrive
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/sda15      105M  5.3M  100M   5% /boot/efi
+tmpfs            97M  4.0K   97M   1% /run/user/1001
+```
+In this example, I'm using 6.4Gb out of a total 49Gb -- plenty left over for swap space.
+
+### Create a swap file
+```bash
+sudo fallocate -l 1G /swapfile
+```
+
+### Enable swap
+```bash
+sudo chmod 600 /swapfile
+```
+```bash
+sudo mkswap /swapfile
+```
+```bash
+sudo swapon /swapfile
+```
+```bash
+sudo swapon --show
+```
+```bash
+sudo cp /etc/fstab /etc/fstab.backup
+```
+```bash
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+```
 
 # Base install compose stack
 Contains a compose file that sets up Nginx Proxy Manager and Portainer; a good starting point for server if you want to manage adding additional containers through a GUI.
