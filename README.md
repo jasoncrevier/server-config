@@ -38,7 +38,7 @@ ssh-keygen -t rsa -b 4096 -f /PATH/TO/KEYS
 Then, run the ssh-copy-id command to copy your public key to the remote server:
 ```bash
 ssh-copy-id -i /PATH/TO/KEYS username@remote_host
-# The -i option lets you specify the location of the key. Use it if your keys are not in the default location. By default, keys are stored in ~/.ssh/id_rsa
+# -i lets you specify the location of the key. Use it if your keys are not in the default location. By default, keys are stored in ~/.ssh/id_rsa
 ```
 
 ### Turn off password authentication
