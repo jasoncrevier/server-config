@@ -29,7 +29,7 @@ services:
     volumes:
       - wordpress_data:/var/www/html
     environment:
-      WORDPRESS_DB_HOST: wordpress_db:3306
+      WORDPRESS_DB_HOST: wordpress_db
       WORDPRESS_DB_USER: my_wp_user
       WORDPRESS_DB_PASSWORD: my_wp_user_password
       WORDPRESS_DB_NAME: my_wp_database
@@ -54,6 +54,8 @@ services:
     restart: always
     # ports:
       # - "8080:80" # Not required if using the base install
+    networks:
+      - frontend
     environment:
       PMA_HOST: wordpress_database
       MYSQL_ROOT_PASSWORD: my_password_1234789
