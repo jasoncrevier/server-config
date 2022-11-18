@@ -49,6 +49,7 @@ services:
       MYSQL_USER: my_wp_user
       MYSQL_PASSWORD: my_wp_user_password
   phpmyadmin:
+    container_name: phpmyadmin
     depends_on:
       - wordpress_db
     image: phpmyadmin:latest
