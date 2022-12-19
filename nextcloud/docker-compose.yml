@@ -24,10 +24,11 @@ services:
     container_name: nextcloud
     networks:
       - frontend
+      - backend
     volumes:
       - nextcloud_config:/config
       - nextcloud_data:/data
-    ports:
+    # ports:
       # - 443:443 # Not required if using the base install
     environment:
       - MYSQL_DATABASE=nextcloud
