@@ -34,7 +34,11 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_PASSWORD=changeme
-      - MYSQL_HOST=nextcloud_db
+      - MYSQL_HOST=nextcloud_db:3306
+      - TRUSTED_PROXIES=nginx_proxy_manager
+      - OVERWRITECLIURL=https://your.domain.here # Subsitute your domain
+      - OVERWRITEHOST=your.domain.here # Substitute your domain
+      - OVERWRITEPROTOCOL=https
   nextcloud_db:
     image: lscr.io/linuxserver/mariadb:latest
     restart: always
