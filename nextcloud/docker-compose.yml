@@ -19,7 +19,7 @@ volumes:
 # Create nextcloud and nextcloud_db container
 services:
   nextcloud:
-    image: lscr.io/linuxserver/nextcloud:latest
+    image: nextcloud:latest
     restart: always
     container_name: nextcloud
     networks:
