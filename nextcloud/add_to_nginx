@@ -1,0 +1,11 @@
+# Add this to the Advanced tab in Nginx Proxy Manager
+
+location /.well-known/carddav {return 301 $scheme://$host/remote.php/dav;}
+
+location /.well-known/caldav {return 301 $scheme://$host/remote.php/dav;}
+
+location /.well-known/webdav {return 301 $scheme://$host/remote.php/dav;}
+
+location ^~ /.well-known { return 301 $scheme://$host/index.php$uri; }
+
+try_files $uri $uri/ =404;
