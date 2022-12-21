@@ -15,6 +15,8 @@ volumes:
     name: nextcloud_data
   nextcloud_db:
     name: nextcloud_db
+  nextcloud_apps:
+    name: nextcloud_apps
 
 # Create nextcloud and nextcloud_db container
 services:
@@ -26,8 +28,9 @@ services:
       - frontend
       - backend
     volumes:
-      - nextcloud_config:/config
-      - nextcloud_data:/data
+      - nextcloud_config:/var/www/html/config
+      - nextcloud_data:/var/www/html
+      - nextcloud_apps:/var/www/html/custom_apps
     # ports:
       # - 443:443 # Not required if using the base install
     environment:
