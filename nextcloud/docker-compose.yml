@@ -9,12 +9,18 @@ networks:
 
 # Define volumes
 volumes:
+  nextcloud:
+    name: nextcloud
   nextcloud_config:
     name: nextcloud_config
   nextcloud_data:
     name: nextcloud_data
   nextcloud_db:
     name: nextcloud_db
+  nextcloud_db_data:
+    name: nextcloud_db_data
+  nextcloud_apps:
+    name: nextcloud_apps
 
 # Create nextcloud and nextcloud_db container
 services:
@@ -26,8 +32,10 @@ services:
       - frontend
       - backend
     volumes:
-      - nextcloud_config:/config
-      - nextcloud_data:/data
+      - nextcloud:/var/www/html
+      - nextcloud_config:/var/www/html/config
+      - nextcloud_data:/var/www/html/data
+      - nextcloud_apps:/var/www/html/custom_apps
     # ports:
       # - 443:443 # Not required if using the base install
     environment:
@@ -49,6 +57,7 @@ services:
       - backend
     volumes:
       - nextcloud_db:/var/lib/mysql
+      - nextcloud_db_data:/config
     environment:
       - MYSQL_ROOT_PASSWORD=pleasechangeme
       - MYSQL_PASSWORD=changeme
