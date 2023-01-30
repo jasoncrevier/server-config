@@ -1,0 +1,19 @@
+version: "3.8"
+
+# Define networks
+networks:
+  frontend:
+    external: true #This network exists because we created it with the base install
+
+# Create calibre-web container
+services:
+  calibre-web:
+    container_name: calibre-web
+    image: lscr.io/linuxserver/calibre-web:latest
+    environment:
+      - DOCKER_MODS=linuxserver/mods:universal-calibre #optional - adds ability to convert files
+    restart: always
+    # ports:
+      # - "8083:8083" # Not required if using the base install
+    networks:
+      - frontend
