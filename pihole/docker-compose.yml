@@ -1,0 +1,19 @@
+version: "3.8"
+
+# Create pihole container
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - XXX.XXX.X.XXX:53/tcp # Replace the Xs with the IP of the machine or VM hosting this container
+      - XXX.XXX.X.XXX:53:53/udp # Replace the Xs with the IP of the machine or VM hosting this container
+      - 80:80/tcp
+    environment:
+      TZ: America/Toronto
+      WEBPASSWORD: changeme # Replace this with a strong password
+    network_mode: bridge
+    volumes:
+      - './etc-pihole:/etc/pihole'
+      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+    restart: always
