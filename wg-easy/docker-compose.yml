@@ -1,5 +1,12 @@
 version: "3.8"
 
+# Define networks
+networks:
+  frontend:
+    external: true # This network exists because we created it with the base install
+  backend:
+    external: true # This network exists because we created it with the base install
+
 # Define volumes
 volumes:
   wg-easy:
@@ -10,12 +17,14 @@ services:
   wg-easy:
     image: weejewel/wg-easy:latest
     container_name: wg-easy
+    networks:
+      - frontend
+      - backend
     volumes:
       - wg-easy:/etc/wireguard
     ports:
       - 51820:51820/udp
       - 51821:51821/tcp
-    network_mode: bridge
     environment:
       - WG_HOST=wireguard.jasoncrevier.com # Change this to your host's public address
       - PASSWORD=foobar123
