@@ -4,8 +4,9 @@ version: "3.8"
 networks:
   frontend:
     external: true # This network exists because we created it with the base install
-  backend:
-    external: true # This network exists because we created it with the base install
+  # Uncomment the lines below if you are using my pihole container
+  # pihole:
+    # external: true # Created with the pihole container
 
 # Define volumes
 volumes:
@@ -18,17 +19,17 @@ services:
     image: weejewel/wg-easy:latest
     container_name: wg-easy
     networks:
-      - frontend
-      - backend
+      - pihole
     volumes:
       - wg-easy:/etc/wireguard
     ports:
       - 51820:51820/udp
       - 51821:51821/tcp
     environment:
-      - WG_HOST=wireguard.jasoncrevier.com # Change this to your host's public address
-      - PASSWORD=foobar123
-      - WG_DEFAULT_DNS=192.168.3.96
+      - WG_HOST=wireguard.your.domain # Change this to your host's public address
+      - PASSWORD=foobar123 # Change this to a secure password
+      # Uncomment the line below if you are using my pihole container
+      # - WG_DEFAULT_DNS=172.20.0.2
     cap_add:
       - NET_ADMIN
       - SYS_MODULE

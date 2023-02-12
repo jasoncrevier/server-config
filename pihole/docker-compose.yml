@@ -2,23 +2,24 @@ version: "3.8"
 
 # Define networks
 networks:
-  frontend:
-    external: true # This network exists because we created it with the base install
-  backend:
-    external: true # This network exists because we created it with the base install
-
+  pihole:
+    driver: bridge
+      ipam:
+        config:
+          - subnet: 172.20.0.0/16
+            gateway: 172.20.0.1
 # Create pihole container
 services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
     networks:
-      - frontend
-      - backend
+      pihole:
+        ipv4_address: 172.20.0.2
     ports:
-      - XXX.XXX.X.XXX:53/tcp # Replace the Xs with the IP of the machine or VM hosting this container
+      - XXX.XXX.X.XXX:53:53/tcp # Replace the Xs with the IP of the machine or VM hosting this container
       - XXX.XXX.X.XXX:53:53/udp # Replace the Xs with the IP of the machine or VM hosting this container
-      - 80:80/tcp
+      - 82:80/tcp # In the base install port 80 and 81 are already reserved on the host
     environment:
       TZ: America/Toronto
       WEBPASSWORD: changeme # Replace this with a strong password
