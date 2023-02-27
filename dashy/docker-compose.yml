@@ -20,7 +20,7 @@ services:
     networks:
       - frontend
     volumes:
-      - dashy_config:/app/public/conf.yml
+      - dashy_config:/app/public
       - dashy_icons:/app/public/item-icons
     # ports:
       # - 4000:80 # Not required if using the base install
