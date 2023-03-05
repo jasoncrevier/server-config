@@ -1,0 +1,26 @@
+version: "3.8"
+
+# Define networks
+networks:
+  frontend:
+    external: true # This network exists because we created it with the base install
+
+# Define volumes
+volumes:
+  dashy_config:
+    name: dashy_config
+  dashy_icons:
+    name: dashy_icons
+# Create dashy container
+services:
+  dashy:
+    image: lissy93/dashy:latest
+    restart: always
+    container_name: dashy
+    networks:
+      - frontend
+    volumes:
+      - dashy_config:/app/public
+      - dashy_icons:/app/public/item-icons
+    # ports:
+      # - 4000:80 # Not required if using the base install
