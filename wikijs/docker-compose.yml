@@ -1,0 +1,43 @@
+version: "3.8"
+
+# Define networks
+networks:
+  frontend:
+    external: true # This network exists because we created it with the base install
+  backend:
+    external: true # This network exists because we created it with the base install
+
+# Define volumes
+volumes:
+  wikijs_db:
+    name: wikijs_db
+
+# Create wikijs and wikijs_db containers
+services:
+  wikijs:
+    image: ghcr.io/requarks/wiki:latest
+    container_name: wikijs
+    depends_on:
+      - wikijs_db
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: wikijs_db
+      DB_PORT: 5432
+      DB_USER: username # Change this
+      DB_PASS: password # Change this
+      DB_NAME: wikijs
+    restart: unless-stopped
+    # ports:
+      # - "80:3000" # Not required if using the base install
+
+  wikijs_db:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_DB: wikijs
+      POSTGRES_PASSWORD: password # Change this
+      POSTGRES_USER: username # change this
+    logging:
+      driver: "none"
+    restart: unless-stopped
+    volumes:
+      - wikijs_db:/var/lib/postgresql/data
