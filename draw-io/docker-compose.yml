@@ -5,13 +5,14 @@ networks:
   frontend:
     external: true # This network exists because we created it with the base install
 
-# Create libreddit container
+# Create draw-io container
 services:
-  libreddit:
-    container_name: libreddit
-    image: spikecodes/libreddit:latest
+  draw-io:
+    container_name: draw-io
+    image: jgraph/drawio:latest
     restart: always
     # ports:
       # - "8080:8080" # Not required if using the base install
+      # - "8443:8443" # Not required if using the base install
     networks:
       - frontend

@@ -1,0 +1,81 @@
+version: "3.8"
+
+# Define networks
+networks:
+  frontend:
+    external: true # This network exists because we created it with the base install
+  backend:
+    external: true # This network exists because we created it with the base install
+
+# Define volumes
+volumes:
+  reactive_resume_db:
+    name: reactive_resume_db
+
+# Create containers
+services:
+  reactive_resume_client:
+    image: amruthpillai/reactive-resume:client-latest
+    restart: always
+    container_name: reactive_resume_client
+    networks:
+      - frontend
+      - backend
+    # ports:
+      # - 3000:3000# Not required if using the base install
+    depends_on:
+      - reactive_resume_server
+    environment:
+      - PUBLIC_URL=http://localhost:3000
+      - PUBLIC_SERVER_URL=http://localhost:3100
+      - PUBLIC_GOOGLE_CLIENT_ID=
+  reactive_resume_server:
+    image: amruthpillai/reactive-resume:server-latest
+    restart: always
+    container_name: reactive_resume_server
+    networks:
+      - backend
+    depends_on:
+      - reactive_resume_db
+    environment:
+      - PUBLIC_URL=http://localhost:3000
+      - PUBLIC_SERVER_URL=http://localhost:3100
+      - PUBLIC_GOOGLE_CLIENT_ID=
+      - POSTGRES_DB=changeme1
+      - POSTGRES_USER=changeme2
+      - POSTGRES_PASSWORD=changeme3
+      - SECRET_KEY=change-me-to-something-secure
+      - POSTGRES_HOST=reactive_resume_db
+      - POSTGRES_PORT=5432
+      - POSTGRES_SSL_CERT=
+      - JWT_SECRET=change-me-to-something-secure
+      - JWT_EXPIRY_TIME=604800
+      - GOOGLE_CLIENT_SECRET=
+      - GOOGLE_API_KEY=
+      - MAIL_FROM_NAME=Reactive Resume
+      - MAIL_FROM_EMAIL=noreply@rxresu.me
+      - MAIL_HOST=
+      - MAIL_PORT=
+      - MAIL_USERNAME=
+      - MAIL_PASSWORD=
+      - STORAGE_BUCKET=
+      - STORAGE_REGION=
+      - STORAGE_ENDPOINT=
+      - STORAGE_URL_PREFIX=
+      - STORAGE_ACCESS_KEY=
+      - STORAGE_SECRET_KEY=
+      - PDF_DELETION_TIME=
+  reactive_resume_db:
+    image: postgres:alpine
+    restart: always
+    container_name: reactive_resume_db
+    networks:
+      - backend
+    volumes:
+      - reactive_resume_db:/var/lib/postgresql/data
+    # ports:
+      # - 5432:5432 # Not required if using the base install
+    environment:
+      - POSTGRES_DB=changeme1
+      - POSTGRES_USER=changeme2
+      - POSTGRES_PASSWORD=changeme3

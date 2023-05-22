@@ -43,7 +43,6 @@ services:
     volumes:
       - wordpress_db:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: exampledb
       MYSQL_ROOT_PASSWORD: my_password_1234789
       MYSQL_DATABASE: my_wp_database
       MYSQL_USER: my_wp_user
