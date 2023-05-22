@@ -17,6 +17,10 @@ services:
   reactive_resume_client:
     image: amruthpillai/reactive-resume:client-latest
     restart: always
+    container_name: reactive_resume_client
+    networks:
+      - frontend
+      - backend
     # ports:
       # - 3000:3000# Not required if using the base install
     depends_on:
