@@ -1,0 +1,28 @@
+version: "3.8"
+
+# Define networks
+networks:
+  frontend:
+    external: true # This network exists because we created it with the base install
+  
+# Define volumes
+volumes:
+  homebox_data:
+    name: homebox_data
+  
+# Create homebox container
+services:
+  homebox:
+    image: ghcr.io/hay-kot/homebox:latest
+    restart: always
+    container_name: homebox
+    networks:
+      - frontend
+    volumes:
+      - homebox_data:/data/
+    # ports:
+      # - 3100:7745 # Not required if using the base install
+    environment:
+      - HBOX_LOG_LEVEL=info
+      - HBOX_LOG_FORMAT=text
+      - HBOX_WEB_MAX_UPLOAD_SIZE=10
