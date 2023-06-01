@@ -22,28 +22,30 @@ services:
       - frontend
       - backend
     # ports:
-      # - 3000:3000# Not required if using the base install
+      # - 3000:3000 # Not required if using the base install
     depends_on:
       - reactive_resume_server
     environment:
-      - PUBLIC_URL=http://localhost:3000
-      - PUBLIC_SERVER_URL=http://localhost:3100
+      - PUBLIC_URL=http://reactive_resume_client:3000
+      - PUBLIC_SERVER_URL=http://reactive_resume_db:3100
   reactive_resume_server:
     image: amruthpillai/reactive-resume:server-latest
     restart: always
     container_name: reactive_resume_server
     networks:
       - backend
+    # ports:
+      # - 3100:3100 # Not required if using the base install
     depends_on:
       - reactive_resume_db
     environment:
-      - PUBLIC_URL=http://localhost:3000
-      - PUBLIC_SERVER_URL=http://localhost:3100
+      - PUBLIC_URL=http://reactive_resume_client:3000
+      - PUBLIC_SERVER_URL=http://reactive_resume_db:3100
       - POSTGRES_DB=changeme1
       - POSTGRES_USER=changeme2
       - POSTGRES_PASSWORD=changeme3
       - SECRET_KEY=change-me-to-something-secure
-      - POSTGRES_HOST=postgres
+      - POSTGRES_HOST=reactive_resume_db
       - POSTGRES_PORT=5432
       - JWT_SECRET=change-me-to-something-secure
       - JWT_EXPIRY_TIME=604800
