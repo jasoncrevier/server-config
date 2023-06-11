@@ -26,8 +26,8 @@ services:
     depends_on:
       - reactive_resume_server
     environment:
-      - PUBLIC_URL=http://reactive_resume_client:3000
-      - PUBLIC_SERVER_URL=http://reactive_resume_db:3100
+      - PUBLIC_URL=http://resume.yourdomain.com # Change this to your subdomain/domain
+      - PUBLIC_SERVER_URL=http://resume.yourdomain.com/api # Change this to your subdomain/domain **LEAVE "/api"**
   reactive_resume_server:
     image: amruthpillai/reactive-resume:server-latest
     restart: always
@@ -39,8 +39,8 @@ services:
     depends_on:
       - reactive_resume_db
     environment:
-      - PUBLIC_URL=http://reactive_resume_client:3000
-      - PUBLIC_SERVER_URL=http://reactive_resume_db:3100
+      - PUBLIC_URL=http://resume.yourdomain.com # Change this to your subdomain/domain
+      - PUBLIC_SERVER_URL=http://resume.yourdomain.com/api # Change this to your subdomain/domain **LEAVE "/api"**
       - POSTGRES_DB=changeme1
       - POSTGRES_USER=changeme2
       - POSTGRES_PASSWORD=changeme3
