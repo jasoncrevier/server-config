@@ -22,49 +22,33 @@ services:
       - frontend
       - backend
     # ports:
-      # - 3000:3000# Not required if using the base install
+      # - 3000:3000 # Not required if using the base install
     depends_on:
       - reactive_resume_server
     environment:
-      - PUBLIC_URL=http://localhost:3000
-      - PUBLIC_SERVER_URL=http://localhost:3100
-      - PUBLIC_GOOGLE_CLIENT_ID=
+      - PUBLIC_URL=http://resume.yourdomain.com # Change this to your subdomain/domain
+      - PUBLIC_SERVER_URL=http://resume.yourdomain.com/api # Change this to your subdomain/domain **LEAVE "/api"**
   reactive_resume_server:
     image: amruthpillai/reactive-resume:server-latest
     restart: always
     container_name: reactive_resume_server
     networks:
       - backend
+    # ports:
+      # - 3100:3100 # Not required if using the base install
     depends_on:
       - reactive_resume_db
     environment:
-      - PUBLIC_URL=http://localhost:3000
-      - PUBLIC_SERVER_URL=http://localhost:3100
-      - PUBLIC_GOOGLE_CLIENT_ID=
+      - PUBLIC_URL=http://resume.yourdomain.com # Change this to your subdomain/domain
+      - PUBLIC_SERVER_URL=http://resume.yourdomain.com/api # Change this to your subdomain/domain **LEAVE "/api"**
       - POSTGRES_DB=changeme1
       - POSTGRES_USER=changeme2
       - POSTGRES_PASSWORD=changeme3
       - SECRET_KEY=change-me-to-something-secure
       - POSTGRES_HOST=reactive_resume_db
       - POSTGRES_PORT=5432
-      - POSTGRES_SSL_CERT=
       - JWT_SECRET=change-me-to-something-secure
       - JWT_EXPIRY_TIME=604800
-      - GOOGLE_CLIENT_SECRET=
-      - GOOGLE_API_KEY=
-      - MAIL_FROM_NAME=Reactive Resume
-      - MAIL_FROM_EMAIL=noreply@rxresu.me
-      - MAIL_HOST=
-      - MAIL_PORT=
-      - MAIL_USERNAME=
-      - MAIL_PASSWORD=
-      - STORAGE_BUCKET=
-      - STORAGE_REGION=
-      - STORAGE_ENDPOINT=
-      - STORAGE_URL_PREFIX=
-      - STORAGE_ACCESS_KEY=
-      - STORAGE_SECRET_KEY=
-      - PDF_DELETION_TIME=
   reactive_resume_db:
     image: postgres:alpine
     restart: always
