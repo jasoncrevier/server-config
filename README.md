@@ -42,6 +42,7 @@ Then, install the [base install](https://github.com/jasoncrevier/server-config/t
 - [WikiJS](https://github.com/jasoncrevier/server-config/tree/main/wikijs)
 - [Wordpress](https://github.com/jasoncrevier/server-config/tree/main/wordpress)
 
-## To do
+## :white_check_mark: To do
 
 - Create READMEs for all of these services
+- Add firewall section to basic server setup
