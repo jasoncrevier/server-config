@@ -6,7 +6,7 @@ I make no guarantees that anything here is up-to-date or even working. But I'll 
 
 ## How to use this repo
 
-### Get to know docker and compose
+### :bulb: Get to know docker and compose
 
 For this repo to be useful, you need to know the basics of [docker](https://www.docker.com/). In a nutshell, docker containers are applications that come bundled with everything they need to run. 
 
@@ -31,12 +31,15 @@ Then, install the [base install](https://github.com/jasoncrevier/server-config/t
 - [Calibre-web](https://github.com/jasoncrevier/server-config/tree/main/calibre-web)
 - [Dashy](https://github.com/jasoncrevier/server-config/tree/main/dashy)
 - [Draw.io](https://github.com/jasoncrevier/server-config/tree/main/draw-io)
-- [Changedetection.io](https://github.com/jasoncrevier/server-config/tree/main/changedetection)
+- [FreshRSS](https://github.com/jasoncrevier/server-config/tree/main/freshrss)
+- [HomeBox](https://github.com/jasoncrevier/server-config/tree/main/homebox)
 - [Libreddit](https://github.com/jasoncrevier/server-config/tree/main/libreddit)
 - [Nextcloud](https://github.com/jasoncrevier/server-config/tree/main/nextcloud)
 - [Pihole](https://github.com/jasoncrevier/server-config/tree/main/pihole)
+- [Snapdrop](https://github.com/jasoncrevier/server-config/tree/main/snapdrop)
 - [Uptime Kuma](https://github.com/jasoncrevier/server-config/tree/main/uptime%20kuma)
 - [Wg-easy (Wireguard GUI)](https://github.com/jasoncrevier/server-config/tree/main/wg-easy)
+- [WikiJS](https://github.com/jasoncrevier/server-config/tree/main/wikijs)
 - [Wordpress](https://github.com/jasoncrevier/server-config/tree/main/wordpress)
 
 ## To do
