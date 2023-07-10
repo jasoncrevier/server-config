@@ -1,0 +1,18 @@
+version: "3.8"
+
+# Define networks
+networks:
+  frontend:
+    external: true # This network exists because we created it with the base install
+
+# Create snapdrop container
+services:
+  snapdrop:
+    container_name: snapdrop
+    image: linuxserver/snapdrop:latest
+    restart: always
+    # ports:
+      # - 80:80
+      # - 443:443
+    networks:
+      - frontend
