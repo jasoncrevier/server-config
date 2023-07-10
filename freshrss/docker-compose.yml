@@ -17,7 +17,7 @@ services:
     image: lscr.io/linuxserver/freshrss:latest
     restart: always
     # ports:
-      # - "80:80" # Not required if using the base install
+      # - "8080:8080" # Not required if using the base install
     volumes:
       - freshrss_config:/config
     networks:

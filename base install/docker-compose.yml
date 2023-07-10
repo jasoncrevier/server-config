@@ -24,7 +24,7 @@ services:
     restart: always
     ports:
       - "80:80" # HTTP port
-      - "81:81" # Admin port
+      - "127.0.0.1:81:81" # Admin port -- this is bound to localhost so docker doesn't forward the port to the internet.
       - "443:443" # HTTPS port
     volumes:
       - npm_data:/data
@@ -38,7 +38,7 @@ services:
     restart: always
     ports:
       # - "8000:8000" # Portainer Edge Agent port -- optional
-      - "9443:9443" # HTTPS port
+      - "127.0.0.1:9443:9443" # HTTPS port -- this is bound to localhost so docker doesn't forward the port to the internet.
     volumes:
       - portainer_data:/data
       - /var/run/docker.sock:/var/run/docker.sock # Allows Portainer to connect to the Docker API

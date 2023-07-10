@@ -1,0 +1,44 @@
+version: "3.8"
+
+# Define networks
+networks:
+# These networks get created by my base-install compose file. Remove them if you aren't using that.
+  frontend:
+    external: true
+  backend:
+    external: true
+
+# Define volumes
+volumes:
+  example_volume:
+    name: example_volume
+  another_example_volume:
+    name: another_example_volume
+
+# Create example containers
+services:
+  example_service_frontend:
+    container_name: example_service_frontend
+    image: example_service_frontend:latest
+    restart: unless-stopped
+    volumes:
+      - example_volume:/example/path
+    networks:
+      - frontend
+    # ports:
+      # - 443:443 # Not required if using the base install
+    environment:
+      - TZ=America/Toronto
+  
+  example_service_backend:
+    container_name: example_service_backend
+    image: example_service_backend:latest
+    restart: unless-stopped
+    volumes:
+      - another_example_volume:/example/path
+    networks:
+      - backend
+    # ports:
+      # - 3401:3401 # Not required if using the base install
+    environment:
+      - TZ=America/Toronto

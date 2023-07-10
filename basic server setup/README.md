@@ -4,10 +4,10 @@ This guide assumes you have a fresh Ubuntu server installed. At the time of writ
 
 ## On this page
 
-- Create a non-root user and disable logging in as root
-- Set up SSH keys
-- Set up a firewall (to do)
-- Add swap space
+- [Create a non-root user and disable logging in as root](#create-a-non-root-user-and-disable-logging-in-as-root)
+- [Set up SSH keys](#set-up-ssh-keys)
+- [Set up a firewall (to do)](#set-up-a-firewall)
+- [Add swap space](#add-swap-space)
 
 ## Create a non-root user and disable logging in as root
 
@@ -31,6 +31,8 @@ usermod -aG sudo USER
 ### Disable logging in as root
 
 On the remote server, edit `/etc/ssh/sshd_config` and set `PermitRootLogin` to `no`
+
+[Back to top](#on-this-page)
 
 ## Set up SSH keys
 
@@ -58,9 +60,13 @@ ssh-copy-id -i /PATH/TO/KEYS username@remote_host
 
 On the remote server, edit `/etc/ssh/sshd_config` and set `PasswordAuthentication` to `no`
 
+[Back to top](#on-this-page)
+
 ## Set up a firewall
 
 ==TO DO==
+
+[Back to top](#on-this-page)
 
 ## Add swap space
 
@@ -131,3 +137,5 @@ sudo cp /etc/fstab /etc/fstab.backup
 ```bash
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 ```
+
+[Back to top](#on-this-page)
