@@ -9,11 +9,16 @@ networks:
       config:
       - subnet: 172.20.0.0/16
         gateway: 172.20.0.1
+
 # Create pihole container
 services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
+    restart: unless-stopped
+    volumes:
+      - './etc-pihole:/etc/pihole'
+      - './etc-dnsmasq.d:/etc/dnsmasq.d'
     networks:
       pihole:
         ipv4_address: 172.20.0.2
@@ -22,9 +27,5 @@ services:
       - XXX.XXX.X.XXX:53:53/udp # Replace the Xs with the IP of the machine or VM hosting this container
       - 82:80/tcp # In the base install port 80 and 81 are already reserved on the host
     environment:
-      TZ: America/Toronto
-      WEBPASSWORD: changeme # Replace this with a strong password
-    volumes:
-      - './etc-pihole:/etc/pihole'
-      - './etc-dnsmasq.d:/etc/dnsmasq.d'
-    restart: always
+      - TZ=America/Toronto
+      - WEBPASSWORD=changeme # Replace this with a strong password

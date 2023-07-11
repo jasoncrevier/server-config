@@ -2,12 +2,13 @@ version: "3.8"
 
 # Define networks
 networks:
+# These networks get created by my base-install compose file. Remove them if you aren't using that.
   frontend:
-    external: true # This network exists because we created it with the base install
+    external: true
   backend:
-    external: true # This network exists because we created it with the base install
+    external: true
 
-# Define volumes
+# Create volumes
 volumes:
   nextcloud:
     name: nextcloud
@@ -25,17 +26,17 @@ volumes:
 # Create nextcloud and nextcloud_db container
 services:
   nextcloud:
-    image: nextcloud:latest
-    restart: always
     container_name: nextcloud
-    networks:
-      - frontend
-      - backend
+    image: nextcloud:latest
+    restart: unless-stopped
     volumes:
       - nextcloud:/var/www/html
       - nextcloud_config:/var/www/html/config
       - nextcloud_data:/var/www/html/data
       - nextcloud_apps:/var/www/html/custom_apps
+    networks:
+      - frontend
+      - backend
     # ports:
       # - 443:443 # Not required if using the base install
     environment:
@@ -49,17 +50,22 @@ services:
       - OVERWRITECLIURL=https://your.domain.here # Subsitute your domain
       - OVERWRITEHOST=your.domain.here # Substitute your domain
       - OVERWRITEPROTOCOL=https
+      - TZ=America/Toronto
+
   nextcloud_db:
-    image: lscr.io/linuxserver/mariadb:latest
-    restart: always
     container_name: nextcloud_db
-    networks:
-      - backend
+    image: lscr.io/linuxserver/mariadb:latest
+    restart: unless-stopped
     volumes:
       - nextcloud_db:/var/lib/mysql
       - nextcloud_db_data:/config
+    networks:
+      - backend
+    # ports
+      # - 3306:3306 # Not required if using the base install
     environment:
       - MYSQL_ROOT_PASSWORD=pleasechangeme
       - MYSQL_PASSWORD=changeme
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
+      - TZ=America/Toronto

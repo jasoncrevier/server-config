@@ -1,6 +1,13 @@
 version: "3.8"
 
-# Create volumes for NPM and Portainer
+# Create frontend and backend networks
+networks:
+  frontend:
+    name: frontend
+  backend:
+    name: backend
+
+# Create volumes
 volumes:
   portainer_data:
     name: portainer_data
@@ -9,38 +16,36 @@ volumes:
   npm_certificates:
     name: npm_certificates
 
-# Create frontend and backend networks
-networks:
-  frontend:
-    name: frontend
-  backend:
-    name: backend
-
 # Create NPM and Portainer containers
 services:
   nginx_proxy_manager:
     container_name: nginx_proxy_manager
     image: jc21/nginx-proxy-manager:latest
-    restart: always
-    ports:
-      - "80:80" # HTTP port
-      - "127.0.0.1:81:81" # Admin port -- this is bound to localhost so docker doesn't forward the port to the internet.
-      - "443:443" # HTTPS port
+    restart: unless-stopped
     volumes:
       - npm_data:/data
       - npm_certificates:/etc/letsencrypt
     networks:
       - frontend
       - backend
+    ports:
+      - "80:80" # HTTP port
+      - "127.0.0.1:81:81" # Admin port -- this is bound to localhost so docker doesn't forward the port to the internet.
+      - "443:443" # HTTPS port
+    environment:
+      TZ: America/Toronto
+    
   portainer:
     container_name: portainer
     image: portainer/portainer-ce:latest
-    restart: always
-    ports:
-      # - "8000:8000" # Portainer Edge Agent port -- optional
-      - "127.0.0.1:9443:9443" # HTTPS port -- this is bound to localhost so docker doesn't forward the port to the internet.
+    restart: unless-stopped
     volumes:
       - portainer_data:/data
       - /var/run/docker.sock:/var/run/docker.sock # Allows Portainer to connect to the Docker API
     networks:
       - backend
+    ports:
+      # - "8000:8000" # Portainer Edge Agent port -- optional
+      - "127.0.0.1:9443:9443" # HTTPS port -- this is bound to localhost so docker doesn't forward the port to the internet.
+    environment:
+      - TZ=America/Toronto

@@ -2,12 +2,13 @@ version: "3.8"
 
 # Define networks
 networks:
+# These networks get created by my base-install compose file. Remove them if you aren't using that.
   frontend:
-    external: true #This network exists because we created it with the base install
+    external: true
   backend:
-    external: true #This network exists because we created it with the base install
+    external: true
 
-# Define volumes
+# Create volumes
 volumes:
   wordpress_data:
     name: wordpress_data
@@ -18,46 +19,52 @@ volumes:
 services:
   wordpress:
     container_name: wordpress
-    depends_on:
-      - wordpress_db
     image: wordpress:latest
-    restart: always
-    # ports:
-      # - "8080:80" # Not required if using the base install
+    restart: unless-stopped
+    volumes:
+      - wordpress_data:/var/www/html
     networks:
       - frontend
       - backend
-    volumes:
-      - wordpress_data:/var/www/html
+    # ports:
+      # - "80:80" # Not required if using the base install
     environment:
-      WORDPRESS_DB_HOST: wordpress_db
-      WORDPRESS_DB_USER: my_wp_user
-      WORDPRESS_DB_PASSWORD: my_wp_user_password
-      WORDPRESS_DB_NAME: my_wp_database
+      - WORDPRESS_DB_HOST=wordpress_db
+      - WORDPRESS_DB_USER=my_wp_user
+      - WORDPRESS_DB_PASSWORD=my_wp_user_password
+      - WORDPRESS_DB_NAME=my_wp_database
+      - TZ=America/Toronto
+    depends_on:
+      - wordpress_db
+  
   wordpress_db:
     container_name: wordpress_db
     image: mysql:latest
-    restart: always
-    networks:
-      - backend
+    restart: unless-stopped
     volumes:
       - wordpress_db:/var/lib/mysql
+    networks:
+      - backend
+    # ports
+      # - 3306:3306 # Not required if using the base install
     environment:
-      MYSQL_ROOT_PASSWORD: my_password_1234789
-      MYSQL_DATABASE: my_wp_database
-      MYSQL_USER: my_wp_user
-      MYSQL_PASSWORD: my_wp_user_password
+      - MYSQL_ROOT_PASSWORD=my_password_1234789
+      - MYSQL_DATABASE=my_wp_database
+      - MYSQL_USER=my_wp_user
+      - MYSQL_PASSWORD=my_wp_user_password
+      - TZ=America/Toronto
+  
   phpmyadmin:
     container_name: phpmyadmin
-    depends_on:
-      - wordpress_db
     image: phpmyadmin:latest
-    restart: always
-    # ports:
-      # - "8080:80" # Not required if using the base install
+    restart: unless-stopped
     networks:
       - frontend
       - backend
+    # ports:
+      # - "80:80" # Not required if using the base install
     environment:
-      PMA_HOST: wordpress_db
-      MYSQL_ROOT_PASSWORD: my_password_1234789
+      - PMA_HOST=wordpress_db
+      - MYSQL_ROOT_PASSWORD=my_password_1234789
+    depends_on:
+      - wordpress_db

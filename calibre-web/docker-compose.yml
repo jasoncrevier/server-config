@@ -2,10 +2,11 @@ version: "3.8"
 
 # Define networks
 networks:
+# This network gets created by my base-install compose file. Remove it if you aren't using that.
   frontend:
-    external: true #This network exists because we created it with the base install
+    external: true
 
-# Define volumes
+# Create volumes
 volumes:
   calibre:
     name: calibre
@@ -17,33 +18,33 @@ services:
   calibre:
     container_name: calibre
     image: linuxserver/calibre:latest
+    restart: unless-stopped
+    volumes:
+      - calibre:/config
+    networks:
+      - frontend
+    # ports:
+      # - "8080:8080" # Not required if using the base install
+      # - "8081:8081" # Not required if using the base install
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Toronto
       - PASSWORD=changeme
-    volumes:
-      - calibre:/config
-    restart: always
-    # ports:
-      # - "8080:8080" # Not required if using the base install
-      # - "8081:8081" # Not required if using the base install
-    networks:
-      - frontend
 
   calibre-web:
     container_name: calibre-web
     image: linuxserver/calibre-web:latest
+    restart: unless-stopped
+    volumes:
+      - calibre-web:/config
+      - calibre:/books
+    networks:
+      - frontend
+    # ports:
+      # - "8083:8083" # Not required if using the base install
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Toronto
       - DOCKER_MODS=linuxserver/mods:universal-calibre #optional - adds ability to convert files
-    volumes:
-      - calibre-web:/config
-      - calibre:/books
-    restart: always
-    # ports:
-      # - "8083:8083" # Not required if using the base install
-    networks:
-      - frontend

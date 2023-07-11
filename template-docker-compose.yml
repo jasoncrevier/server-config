@@ -8,7 +8,7 @@ networks:
   backend:
     external: true
 
-# Define volumes
+# Create volumes
 volumes:
   example_volume:
     name: example_volume
