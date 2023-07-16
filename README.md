@@ -27,53 +27,53 @@ Then, install the [base install](/base%20install) compose stack. It gives you 2 
 
 ## In this repo
 
-### Docker and reverse proxy management
+### :construction_worker: Docker and reverse proxy management
 
 - [Portainer + Nginx proxy manager (base install)](/base%20install)
 
-### Books
+### :book: Books
 
 - [Calibre-web](/calibre-web)
 
-### Dashboard
+### :placard: Dashboard
 
 - [Dashy](/dashy)
 
-### Diagrams
+### :chart_with_upwards_trend: Diagrams
 
 - [Draw.io](/draw-io)
 
-### RSS
+### :inbox_tray: RSS
 
 - [FreshRSS](/freshrss)
 
-### Inventory management
+### :package: Inventory management
 
 - [HomeBox](/homebox)
 
-### Alternative frontends
+### :shield: Alternative frontends
 
 - [Libreddit](/libreddit)
 
-### Storage and filesharing
+### :open_file_folder: Storage and filesharing
 
 - [Nextcloud](/nextcloud)
 - [Snapdrop](/snapdrop)
 
-### DNS
+### :clipboard: DNS
 
 - [Pihole](/pihole)
 
-### Monitoring
+### :eye: Monitoring
 
 - [Uptime Kuma](/uptime%20kuma)
 
-### Websites and wikis
+### :desktop_computer: Websites and wikis
 
 - [WikiJS](/wikijs)
 - [Wordpress](/wordpress)
 
-### Remote access
+### :earth_americas: Remote access
 
 - [Wg-easy (Wireguard GUI)](/wg-easy)
 
