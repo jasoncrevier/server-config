@@ -27,7 +27,7 @@ Then, install the [base install](https://github.com/jasoncrevier/server-config/t
 
 ## In this repo
 
-- [Portainer + Nginx proxy manager (base install)](https://github.com/jasoncrevier/server-config/tree/main/base%20install)
+- [Portainer + Nginx proxy manager (base install)](/base%20install)
 - [Calibre-web](https://github.com/jasoncrevier/server-config/tree/main/calibre-web)
 - [Dashy](https://github.com/jasoncrevier/server-config/tree/main/dashy)
 - [Draw.io](https://github.com/jasoncrevier/server-config/tree/main/draw-io)
