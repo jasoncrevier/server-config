@@ -4,7 +4,8 @@ read VAR_USER
 
 # Update and install additional packages
 apt update -y
-apt install ssh sudo ca-certificates curl gnupg micro fish -y
+apt upgrade -y
+apt install sudo ca-certificates curl gnupg micro fish -y
 
 # Add the docker repository (these steps are from https://docs.docker.com/engine/install/debian)
 install -m 0755 -d /etc/apt/keyrings
