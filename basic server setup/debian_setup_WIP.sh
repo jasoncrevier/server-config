@@ -6,9 +6,6 @@ read VAR_USER
 apt update -y
 apt install ssh sudo ca-certificates curl gnupg micro fish -y
 
-# Give the username from before sudo access
-usermod -aG sudo $VAR_USER
-
 # Add the docker repository (these steps are from https://docs.docker.com/engine/install/debian)
 install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -21,3 +18,6 @@ echo \
 # Update and install docker packages
 apt update -y
 apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+
+# Give the username from before sudo and docker group access
+usermod -aG sudo,docker $VAR_USER
