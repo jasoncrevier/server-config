@@ -18,27 +18,14 @@ apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-co
 
 # Prompt for a username to add to the sudo and docker groups
 while true; do
-read -p "Enter the username you want to give access to sudo and docker: " VAR_USER
-echo
-read -p "Are you sure you want to give sudo and docker access to $VAR_USER? (y/N) " -n 1 VAR_SELECTION
-
-case $VAR_SELECTION in
-    [Yy]* ) usermod -aG sudo,docker $VAR_USER;; break;;
-    [Nn]* ) echo $'\n\nLet\'s try again\n';;
-    * ) echo $'\nLet\'s try again\n';;
-esac
-done
-
-# Prompt for a username to add to the sudo and docker groups
-while true; do
 echo -e "\e[0m"
 read -p "Enter the username you want to give access to sudo and docker: " VAR_USER
 echo
 read -p "Are you sure you want to give sudo and docker access to $VAR_USER? (y/N) " -n 1 VAR_SELECTION
 
 case $VAR_SELECTION in
-    [Yy]* ) usermod -aG sudo,docker $VAR_USER;; break;;
-    [Nn]* ) echo -e $'\n\n\e[1mLet\'s try again';;
-    * ) echo $'\n\e[1mLet\'s try again';;
+  [Yy]* ) usermod -aG sudo,docker $VAR_USER;; break;;
+  [Nn]* ) echo -e $'\n\n\e[1mLet\'s try again';;
+  * ) echo $'\n\e[1mLet\'s try again';;
 esac
 done
