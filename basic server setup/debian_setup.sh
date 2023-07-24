@@ -2,11 +2,8 @@
 
 #---
 # Log into your server and run "su -" to switch to root
-# Run "apt install git"
-# Run "git clone https://github.com/jasoncrevier/server-config"
-# Run "cd github/server-config/basic\ server\ setup/"
-# Run "chmod u+x debian_setup.sh"
-# Run "./debian_setup.sh"
+# Run "apt install git -y && git clone https://github.com/jasoncrevier/server-config && cd server-config/basic\ server\ setup/ && chmod u+x debian_setup.sh && ./debian_setup.sh
+# Log out and back in when the script completes
 #--- 
 
 # Update and install additional packages
@@ -40,3 +37,6 @@ case $VAR_SELECTION in
   * ) echo $'\n\e[1mLet\'s try again';;
 esac
 done
+
+echo -e $'\n\n\e[1mSetup script complete. Log out and back in.'
+echo ""
