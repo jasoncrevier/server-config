@@ -1,5 +1,14 @@
 #!/bin/bash
 
+#---
+# Log into your server and run "su -" to switch to root
+# Run "apt install git"
+# Run "git clone https://github.com/jasoncrevier/server-config"
+# Run "cd github/server-config/basic\ server\ setup/"
+# Run "chmod u+x debian_setup.sh"
+# Run "./debian_setup.sh"
+#--- 
+
 # Update and install additional packages
 apt update -y
 apt upgrade -y
