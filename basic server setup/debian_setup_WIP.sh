@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 # Update and install additional packages
 apt update -y
