@@ -1,7 +1,9 @@
+#! /bin/bash
+
 # Update and install additional packages
 apt update -y
 apt upgrade -y
-apt install sudo ca-certificates curl gnupg micro fish -y
+apt install sudo ca-certificates curl gnupg micro fish ufw -y
 
 # Add the docker repository (these steps are from https://docs.docker.com/engine/install/debian)
 install -m 0755 -d /etc/apt/keyrings
@@ -24,7 +26,7 @@ echo
 read -p "Are you sure you want to give sudo and docker access to $VAR_USER? (y/N) " -n 1 VAR_SELECTION
 
 case $VAR_SELECTION in
-  [Yy]* ) usermod -aG sudo,docker $VAR_USER;; break;;
+  [Yy]* ) usermod -aG sudo,docker $VAR_USER; break;;
   [Nn]* ) echo -e $'\n\n\e[1mLet\'s try again';;
   * ) echo $'\n\e[1mLet\'s try again';;
 esac
