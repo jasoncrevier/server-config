@@ -16,9 +16,9 @@ All the applications in this repo are described in their own docker-compose.yml 
 
 ### :rocket: Get your server set up
 
-First, check out my [basic server setup](https://github.com/jasoncrevier/server-config/tree/main/basic%20server%20setup). If you're new to self-hosting, there's a few tips in there to help with performance and security.
+First, check out my [basic server setup](/basic%20server%20setup). If you're new to self-hosting, there's a few tips in there to help with performance and security.
 
-Then, install the [base install](https://github.com/jasoncrevier/server-config/tree/main/base%20install) compose stack. It gives you 2 useful containers:
+Then, install the [base install](/base%20install) compose stack. It gives you 2 useful containers:
 
 - Portainer -- A GUI for managing docker containers
 - Nginx proxy manager -- A reverse proxy with a GUI and built in letsencrypt module for generating SSL certificates
@@ -27,21 +27,57 @@ Then, install the [base install](https://github.com/jasoncrevier/server-config/t
 
 ## In this repo
 
-- [Portainer + Nginx proxy manager (base install)](https://github.com/jasoncrevier/server-config/tree/main/base%20install)
-- [Calibre-web](https://github.com/jasoncrevier/server-config/tree/main/calibre-web)
-- [Dashy](https://github.com/jasoncrevier/server-config/tree/main/dashy)
-- [Draw.io](https://github.com/jasoncrevier/server-config/tree/main/draw-io)
-- [FreshRSS](https://github.com/jasoncrevier/server-config/tree/main/freshrss)
-- [HomeBox](https://github.com/jasoncrevier/server-config/tree/main/homebox)
-- [Libreddit](https://github.com/jasoncrevier/server-config/tree/main/libreddit)
-- [Nextcloud](https://github.com/jasoncrevier/server-config/tree/main/nextcloud)
-- [Pihole](https://github.com/jasoncrevier/server-config/tree/main/pihole)
-- [Snapdrop](https://github.com/jasoncrevier/server-config/tree/main/snapdrop)
-- [Uptime Kuma](https://github.com/jasoncrevier/server-config/tree/main/uptime%20kuma)
-- [Wg-easy (Wireguard GUI)](https://github.com/jasoncrevier/server-config/tree/main/wg-easy)
-- [WikiJS](https://github.com/jasoncrevier/server-config/tree/main/wikijs)
-- [Wordpress](https://github.com/jasoncrevier/server-config/tree/main/wordpress)
+### :construction_worker: Docker and reverse proxy management
 
-## To do
+- [Portainer + Nginx proxy manager (base install)](/base%20install)
+
+### :book: Books
+
+- [Calibre-web](/calibre-web)
+
+### :placard: Dashboard
+
+- [Dashy](/dashy)
+
+### :chart_with_upwards_trend: Diagrams
+
+- [Draw.io](/draw-io)
+
+### :inbox_tray: RSS
+
+- [FreshRSS](/freshrss)
+
+### :package: Inventory management
+
+- [HomeBox](/homebox)
+
+### :shield: Alternative frontends
+
+- [Libreddit](/libreddit)
+
+### :open_file_folder: Storage and filesharing
+
+- [Nextcloud](/nextcloud)
+- [Snapdrop](/snapdrop)
+
+### :clipboard: DNS
+
+- [Pihole](/pihole)
+
+### :eye: Monitoring
+
+- [Uptime Kuma](/uptime%20kuma)
+
+### :desktop_computer: Websites and wikis
+
+- [WikiJS](/wikijs)
+- [Wordpress](/wordpress)
+
+### :earth_americas: Remote access
+
+- [Wg-easy (Wireguard GUI)](/wg-easy)
+
+## :white_check_mark: To do
 
 - Create READMEs for all of these services
+- Add firewall section to basic server setup

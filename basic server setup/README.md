@@ -1,6 +1,12 @@
-# Basic Ubuntu server setup
+# Basic ~~Ubuntu~~ Debian server setup
 
-This guide assumes you have a fresh Ubuntu server installed. At the time of writing, I'm using Ubuntu server 22.10. Most of this will work on other Linux distributions, but you'll need to adapt it for your package manager / general setup.
+~~This guide assumes you have a fresh Ubuntu server installed. At the time of writing, I'm using Ubuntu server 22.10.~~ 
+
+I recently switched from Ubuntu to Debian -- just to cut down my OS footprint. I scripted a lot of the setup in this file: [debian_setup.sh](/basic%20server%20setup/debian_setup.sh)
+
+I'll update this guide to walk through the steps of using that script at some point. Until then, the steps are commented in the script.
+
+Most of this will work on other Linux distributions, but you'll need to adapt it for your package manager / general setup.
 
 ## On this page
 
@@ -64,7 +70,19 @@ On the remote server, edit `/etc/ssh/sshd_config` and set `PasswordAuthenticatio
 
 ## Set up a firewall
 
-==TO DO==
+I recommend [UncomplicatedFirewall (UFW)](https://en.wikipedia.org/wiki/Uncomplicated_Firewall) as a simple, easy to use firewall manager.
+
+> :bulb: Tip: Docker port mappings will override UFW. You can avoid forwading ports directly to the internet in your docker commands by mapping ports to the localhost. For example: 127.0.0.1:81:81
+>
+> See my base install compose file for examples: [base install](/base%20install/docker-compose.yml)
+
+Here's how I recommend setting it up:
+
+### Install UFW
+If you're using Ubuntu, UFW should be installed by default. If it's not, install it with this command:
+```bash
+sudo apt install ufw
+```
 
 [Back to top](#on-this-page)
 
@@ -72,7 +90,9 @@ On the remote server, edit `/etc/ssh/sshd_config` and set `PasswordAuthenticatio
 
 This step is optional. I've found that some servers with low memory can start to crash without a swap file, so try adding one if you're getting timeout errors or other crashes.
 
-Swap space is a chunk of harddrive space that the system can use when it runs out of RAM. It's slower than RAM, but it acts as a safeguard if your system runs out of RAM. Here's how to add a swap file:
+Swap space is a chunk of harddrive space that the system can use when it runs out of RAM. It's slower than RAM, but it acts as a safeguard if your system runs out of RAM. 
+
+Here's how to add a swap file:
 
 ### Check if you already have swap space allocated
 
