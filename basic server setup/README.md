@@ -2,7 +2,7 @@
 
 ~~This guide assumes you have a fresh Ubuntu server installed. At the time of writing, I'm using Ubuntu server 22.10.~~ 
 
-I recently switched from Ubuntu to Debian -- just to cut down my OS footprint. I scripted a lot of the setup in this file: [debian_setup.sh](/debian_setup.sh)
+I recently switched from Ubuntu to Debian -- just to cut down my OS footprint. I scripted a lot of the setup in this file: [debian_setup.sh](/basic%20server%20setup/debian_setup.sh)
 
 I'll update this guide to walk through the steps of using that script at some point. Until then, the steps are commented in the script.
 
