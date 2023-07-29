@@ -8,7 +8,7 @@ networks:
 
 # Create volumes
 volumes:
-  example_volume:
+  memos_data:
     name: memos_data
 
 # Create memos container
