@@ -15,6 +15,26 @@ Most of this will work on other Linux distributions, but you'll need to adapt it
 - [Set up a firewall (to do)](#set-up-a-firewall)
 - [Add swap space](#add-swap-space)
 
+## Using the debian_setup.sh script (WIP)
+
+- login to server
+- run these commands:
+
+```su -```
+
+```apt install git```
+
+```git clone https://github.com/jasoncrevier/server-config```
+
+```cd server-config/basic\ server\ setup/```
+
+```chmod +x debian_setup.sh```
+
+```./debian_setup.sh```
+
+- enter your username
+- exit
+
 ## Create a non-root user and disable logging in as root
 
 It's a good idea to create a new user, give them root privileges, and disable logging in as root. That way, if someone does manage to gain access to your server, they still need your password to run anything as root. Here's how:
