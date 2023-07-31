@@ -1,10 +1,6 @@
-# Basic ~~Ubuntu~~ Debian server setup
+# Basic Debian server setup
 
-~~This guide assumes you have a fresh Ubuntu server installed. At the time of writing, I'm using Ubuntu server 22.10.~~ 
 
-I recently switched from Ubuntu to Debian -- just to cut down my OS footprint. I scripted a lot of the setup in this file: [debian_setup.sh](/basic%20server%20setup/debian_setup.sh)
-
-I'll update this guide to walk through the steps of using that script at some point. Until then, the steps are commented in the script.
 
 Most of this will work on other Linux distributions, but you'll need to adapt it for your package manager / general setup.
 
@@ -15,11 +11,53 @@ Most of this will work on other Linux distributions, but you'll need to adapt it
 - [Set up a firewall (to do)](#set-up-a-firewall)
 - [Add swap space](#add-swap-space)
 
-## Create a non-root user and disable logging in as root
+## Set up your environment
+I wrote a script that installs Docker along with a few important tools (and a few I just like) for using a headless Debian server. 
 
-It's a good idea to create a new user, give them root privileges, and disable logging in as root. That way, if someone does manage to gain access to your server, they still need your password to run anything as root. Here's how:
+This script assumes you've finished installing Debian and that you set up a separate (non-root) user. Having a non-root user is good for security.
 
-### Set up a new user
+> :warning: **Note:** this script (probably) only works on Debian.
+
+To install it, log into your server and enter these commands in the terminal:
+
+First, switch to root:
+
+```bash
+su -
+# The dash is important to set up the right login environment
+```
+Then, install git:
+
+```bash
+apt install git
+```
+Then, clone this repo, and navigate to the folder with the script:
+```bash
+git clone https://github.com/jasoncrevier/server-config
+```
+```bash
+cd server-config/basic\ server\ setup/
+```
+Then, make the script executable:
+```bash
+chmod +x debian_setup.sh
+```
+Then, run the script:
+```bash
+./debian_setup.sh
+# Runs the script
+```
+Then:
+- enter your username when it prompts you, and
+- press y.
+
+Lastly, log out of your server and log back in to apply docker and sudo access.
+
+## Disable logging in as root
+
+It's a good idea to create a non-root user, give them permission to use sudo (to escalate to root on a per-command basis), and disable logging remotely through ssh as root. That way, if someone does manage to gain access to your server, they still need your password to run anything as root.
+
+### Set up a new user (you can skip this if you used the setup script above)
 
 First, add a user (replace USER with the username you want):
 
@@ -34,7 +72,7 @@ usermod -aG sudo USER
 # The -aG option appends the user to the chosen group (sudo).
 ```
 
-### Disable logging in as root
+### Disable logging in as root remotely
 
 On the remote server, edit `/etc/ssh/sshd_config` and set `PermitRootLogin` to `no`
 
@@ -79,10 +117,12 @@ I recommend [UncomplicatedFirewall (UFW)](https://en.wikipedia.org/wiki/Uncompli
 Here's how I recommend setting it up:
 
 ### Install UFW
-If you're using Ubuntu, UFW should be installed by default. If it's not, install it with this command:
+If you used the setup script above UFW should be installed already. If it's not, install it with this command:
 ```bash
 sudo apt install ufw
 ```
+
+### Block all incoming ports by default
 
 [Back to top](#on-this-page)
 
