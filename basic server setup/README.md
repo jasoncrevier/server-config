@@ -15,25 +15,37 @@ Most of this will work on other Linux distributions, but you'll need to adapt it
 - [Set up a firewall (to do)](#set-up-a-firewall)
 - [Add swap space](#add-swap-space)
 
-## Using the debian_setup.sh script (WIP)
+## Set up your environment
+I wrote a script that installs Docker along with a few basic tools for using a headless debian server. It also asks you to enter your username to give you docker and sudo access.
 
-- login to server
-- run these commands:
+> **Note:** this script (probably) only works on Debian.
 
-```su -```
+To install it, log into your server and run these commands:
 
-```apt install git```
+```bash
+su -
+# The dash is important to set up the right login environment
 
-```git clone https://github.com/jasoncrevier/server-config```
+apt install git
+# Installs git so we can use it to clone this repo and get the script
 
-```cd server-config/basic\ server\ setup/```
+git clone https://github.com/jasoncrevier/server-config
+# Clones this repo
 
-```chmod +x debian_setup.sh```
+cd server-config/basic\ server\ setup/
+# Switched to the folder that contains the script
 
-```./debian_setup.sh```
+chmod +x debian_setup.sh
+# Makes the script executable
 
-- enter your username
-- exit
+./debian_setup.sh
+# Runs the script
+```
+Then:
+- enter your username when it prompts you, and
+- press y.
+
+Lastly, log out of your server and log back in to apply docker and sudo access.
 
 ## Create a non-root user and disable logging in as root
 
