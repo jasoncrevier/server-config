@@ -80,8 +80,3 @@ Then, install the [base install](/base%20install) compose stack. It gives you 2 
 ### :notebook: Notes
 
 - [Memos](/memos)
-
-## :white_check_mark: To do
-
-- Create READMEs for all of these services
-- Add firewall section to basic server setup
