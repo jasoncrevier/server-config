@@ -9,6 +9,7 @@ Most of this will work on other Linux distributions, but you'll need to adapt it
 - [Set up SSH keys](#set-up-ssh-keys)
 - [Set up a firewall (to do)](#set-up-a-firewall)
 - [Add swap space](#add-swap-space)
+- [What's next?](#whats-next)
 
 ## Set up your environment
 I wrote a script that installs Docker along with a few important tools (and a few I just like) for using a headless Debian server. 
@@ -198,5 +199,15 @@ sudo cp /etc/fstab /etc/fstab.backup
 ```bash
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 ```
+
+[Back to top](#on-this-page)
+
+## What's next?
+Now that your server is set up, you can start installing services. I recommend setting up my [base install](/base%20install) compose stack. It gives you 2 useful containers:
+
+- Portainer -- A GUI for managing docker containers
+- Nginx proxy manager -- A reverse proxy with a GUI and built in letsencrypt module for generating SSL certificates
+
+Then you can use the **Stacks** feature in **Portainer** to easily add any of the services in this repo to your base install.
 
 [Back to top](#on-this-page)
