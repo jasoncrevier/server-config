@@ -1,12 +1,11 @@
 # Basic Debian server setup
-
-
+This page walks through my typical Debian server environment.
 
 Most of this will work on other Linux distributions, but you'll need to adapt it for your package manager / general setup.
 
 ## On this page
-
-- [Create a non-root user and disable logging in as root](#create-a-non-root-user-and-disable-logging-in-as-root)
+- [Set up your environment](#set-up-your-environment)
+- [Disable logging in as root](#disable-logging-in-as-root)
 - [Set up SSH keys](#set-up-ssh-keys)
 - [Set up a firewall (to do)](#set-up-a-firewall)
 - [Add swap space](#add-swap-space)
@@ -52,6 +51,8 @@ Then:
 - press y.
 
 Lastly, log out of your server and log back in to apply docker and sudo access.
+
+[Back to top](#on-this-page)
 
 ## Disable logging in as root
 
