@@ -28,21 +28,18 @@ services:
       # - 8066:8066 # Not required if using the base install
     environment:
       - TZ=America/Toronto
+      - VIEWTUBE_DATABASE_HOST=viewtube_db
+      - VIEWTUBE_REDIS_HOST=viewtube_redis
+      - VIEWTUBE_DATA_DIRECTORY=/data
+      - VIEWTUBE_CLUSTERED=false
     depends_on:
       - viewtube_db
       - viewtube_redis
-    environment:
-      VIEWTUBE_DATABASE_HOST: viewtube_db
-      VIEWTUBE_REDIS_HOST: viewtube_redis
-      VIEWTUBE_DATA_DIRECTORY: /data
-      VIEWTUBE_CLUSTERED: 'false'
   
   viewtube_db:
     container_name: viewtube_db
     image: mongo:latest
     restart: unless-stopped
-    volumes:
-      - another_example_volume:/example/path
     networks:
       - backend
     # ports:
