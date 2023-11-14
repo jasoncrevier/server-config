@@ -1,0 +1,57 @@
+version: "3.8"
+
+# Define networks
+networks:
+# These networks get created by my base-install compose file. Remove them if you aren't using that.
+  frontend:
+    external: true
+  backend:
+    external: true
+
+# Create volumes
+volumes:
+  viewtube_data:
+    name: viewtube_data
+
+# Create Viewtube containers
+services:
+  viewtube:
+    container_name: viewtube
+    image: mauriceo/viewtube:latest
+    restart: unless-stopped
+    volumes:
+      - viewtube_data:/data
+    networks:
+      - frontend
+      - backend
+    # ports:
+      # - 8066:8066 # Not required if using the base install
+    environment:
+      - TZ=America/Toronto
+      - VIEWTUBE_DATABASE_HOST=viewtube_db
+      - VIEWTUBE_REDIS_HOST=viewtube_redis
+      - VIEWTUBE_DATA_DIRECTORY=/data
+      - VIEWTUBE_CLUSTERED=false
+    depends_on:
+      - viewtube_db
+      - viewtube_redis
+  
+  viewtube_db:
+    container_name: viewtube_db
+    image: mongo:latest
+    restart: unless-stopped
+    networks:
+      - backend
+    # ports:
+      # - 27018:27017 # Not required if using the base install
+    environment:
+      - TZ=America/Toronto
+
+  viewtube_redis:
+    container_name: viewtube_redis
+    image: redis:latest
+    restart: unless-stopped
+    networks:
+      - backend
+    environment:
+      - TZ=America/Toronto
