@@ -14,7 +14,7 @@ And also [docker compose](https://docs.docker.com/compose/): "a tool for definin
 
 All the applications in this repo are described in their own docker-compose.yml files.
 
-### :rocket: Get your server set up
+### :rocket: Set up your server
 
 First, check out my [basic server setup](/basic%20server%20setup). If you're new to self-hosting, there's a few tips in there to help with performance and security.
 
