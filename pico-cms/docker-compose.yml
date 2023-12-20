@@ -8,14 +8,14 @@ networks:
 
 # Create volumes
 volumes:
-  config:
-    name: config
-  content:
-    name: content
-  plugins:
-    name: plugins
-  themes:
-    name: themes
+  pico_config:
+    name: pico_config
+  pico_content:
+    name: pico_content
+  pico_plugins:
+    name: pico_plugins
+  pico_themes:
+    name: pico_themes
 
 # Create example containers
 services:
@@ -24,10 +24,10 @@ services:
     image: mhzawadi/picocms:latest
     restart: unless-stopped
     volumes:
-      - config:/home/sites/picocms/config
-      - content:/home/sites/picocms/content
-      - plugins:/home/sites/picocms/plugins
-      - themes:/home/sites/picocms/themes
+      - pico_config:/var/www/html/config
+      - pico_content://var/www/html/content
+      - pico_plugins:/var/www/html/plugins
+      - pico_themes:/var/www/html/themes
     networks:
       - frontend
     # ports:
