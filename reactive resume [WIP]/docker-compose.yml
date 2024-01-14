@@ -11,55 +11,70 @@ networks:
 volumes:
   reactive_resume_db:
     name: reactive_resume_db
+  reactive_resume_redis:
+    name: reactive_resume_redis
+  reactive_resume_minio:
+    name: reactive_resume_minio
 
 # Create containers
 services:
   reactive_resume_client:
-    image: amruthpillai/reactive-resume:client-latest
-    restart: always
+    image: amruthpillai/reactive-resume:latest
+    restart: unless-stopped
     container_name: reactive_resume_client
     networks:
       - frontend
       - backend
     # ports:
-      # - 3000:3000 # Not required if using the base install
-    depends_on:
-      - reactive_resume_server
-    environment:
-      - PUBLIC_URL=http://resume.yourdomain.com # Change this to your subdomain/domain
-      - PUBLIC_SERVER_URL=http://resume.yourdomain.com/api # Change this to your subdomain/domain **LEAVE "/api"**
-  reactive_resume_server:
-    image: amruthpillai/reactive-resume:server-latest
-    restart: always
-    container_name: reactive_resume_server
-    networks:
-      - backend
-    # ports:
-      # - 3100:3100 # Not required if using the base install
+      # - 3030:3000 # Not required if using the base install
     depends_on:
       - reactive_resume_db
+      - reactive_resume_minio
+      - reactive_resume_chrome
+      - reactive_resume_redis
     environment:
-      - PUBLIC_URL=http://resume.yourdomain.com # Change this to your subdomain/domain
-      - PUBLIC_SERVER_URL=http://resume.yourdomain.com/api # Change this to your subdomain/domain **LEAVE "/api"**
-      - POSTGRES_DB=changeme1
-      - POSTGRES_USER=changeme2
-      - POSTGRES_PASSWORD=changeme3
-      - SECRET_KEY=change-me-to-something-secure
-      - POSTGRES_HOST=reactive_resume_db
-      - POSTGRES_PORT=5432
-      - JWT_SECRET=change-me-to-something-secure
-      - JWT_EXPIRY_TIME=604800
+      - PUBLIC_URL=http://resume.yoursite.com # Change this to your subdomain/domain
+      - PUBLIC_SERVER_URL=http://resume.yoursite.com/api # Change this to your subdomain/domain **LEAVE "/api"**
   reactive_resume_db:
-    image: postgres:alpine
-    restart: always
+    image: postgres:15-alpine
+    user: 1000:1000
+    restart: unless-stopped
     container_name: reactive_resume_db
     networks:
       - backend
     volumes:
       - reactive_resume_db:/var/lib/postgresql/data
-    # ports:
-      # - 5432:5432 # Not required if using the base install
     environment:
-      - POSTGRES_DB=changeme1
-      - POSTGRES_USER=changeme2
-      - POSTGRES_PASSWORD=changeme3
+      - POSTGRES_USER=changeme1
+      - POSTGRES_PASSWORD=changeme2
+      - POSTGRES_DB=changeme3
+  reactive_resume_minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    container_name: reactive_resume_minio
+    networks:
+      - backend
+    volumes:
+      - reactive_resume_minio:/data
+    # ports:
+      # - 9000:9000 # Not required if using the base install
+    environment:
+      MINIO_ROOT_USER: changeme4
+      MINIO_ROOT_PASSWORD: changeme5
+  reactive_resume_redis:
+    image: redis:latest
+    restart: unless-stopped
+    container_name: reactive_resume_redis
+    networks:
+      - backend
+    volumes:
+      - reactive_resume_redis:/data
+  reactive_resume_chrome:
+    image: browserless/chrome:latest
+    restart: unless-stopped
+    container_name: reactive_resume_chrome
+    networks:
+      - backend
+    env_file:
+      - env.v4
+
