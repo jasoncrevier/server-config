@@ -1,0 +1,30 @@
+version: "3.8"
+
+# Define networks
+networks:
+# These networks get created by my base-install compose file. Remove them if you aren't using that.
+  frontend:
+    external: true
+
+# Create volumes
+volumes:
+  baikal_config:
+    name: baikal_config
+  baikal_data:
+    name: baikal_data
+
+# Create example containers
+services:
+  baikal:
+    container_name: baikal
+    image: ckulka/baikal:latest
+    restart: unless-stopped
+    volumes:
+      - baikal_config:/var/www/baikal/config
+      - baikal_data:/var/www/baikal/Specific
+    networks:
+      - frontend
+    # ports:
+      # - 80:80 # Not required if using the base install
+    environment:
+      - TZ=America/Toronto
