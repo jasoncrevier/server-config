@@ -7,7 +7,7 @@ Most of this will work on other Linux distributions, but you'll need to adapt it
 - [Set up your environment](#set-up-your-environment)
 - [Disable logging in as root](#disable-logging-in-as-root)
 - [Set up SSH keys](#set-up-ssh-keys)
-- [Set up a firewall (to do)](#set-up-a-firewall)
+- [Set up a firewall](#set-up-a-firewall)
 - [Add swap space](#add-swap-space)
 - [What's next?](#whats-next)
 
