@@ -37,7 +37,7 @@ apt install git
 Then, clone this repo, and navigate to the folder with the script:
 ```bash
 git clone https://github.com/jasoncrevier/server-config
-cd server-config/basic\ server\ setup/
+cd server-config/setup/basic\ server\ setup/
 ```
 Then, make the script executable:
 ```bash
