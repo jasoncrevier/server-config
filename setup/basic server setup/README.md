@@ -115,7 +115,7 @@ I recommend [UncomplicatedFirewall (UFW)](https://en.wikipedia.org/wiki/Uncompli
 
 > :bulb: Tip: Docker port mappings will override UFW. You can avoid forwading ports directly to the internet in your docker commands by mapping ports to the localhost. For example: 127.0.0.1:81:81
 >
-> See my base install compose file for examples: [base install](/base%20install/docker-compose.yml)
+> See my base install compose file for examples: [base install](/setup/base%20install/docker-compose.yml)
 
 Here's how I recommend setting it up:
 
@@ -145,7 +145,7 @@ You'll probably also want to open ports for web traffic:
 sudo ufw allow 80
 sudo ufw allow 443
 ```
-If you're using my [base install](/base%20install) compose stack you'll also want to open the admin port for Nginx Proxy Manager:
+If you're using my [base install](/setup/base%20install) compose stack you'll also want to open the admin port for Nginx Proxy Manager:
 ```bash
 sudo ufw allow 81
 ```
@@ -228,7 +228,7 @@ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 [Back to top](#on-this-page)
 
 ## What's next?
-Now that your server is set up, you can start installing services. I recommend setting up my [base install](/base%20install) compose stack. It gives you 2 useful containers:
+Now that your server is set up, you can start installing services. I recommend setting up my [base install](/setup/base%20install) compose stack. It gives you 2 useful containers:
 
 - Portainer -- A GUI for managing docker containers
 - Nginx proxy manager -- A reverse proxy with a GUI and built in letsencrypt module for generating SSL certificates

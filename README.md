@@ -16,9 +16,9 @@ All the applications in this repo are described in their own docker-compose.yml 
 
 ### :rocket: Set up your server
 
-First, check out my [basic server setup](/basic%20server%20setup). If you're new to self-hosting, there's a few tips in there to help with performance and security.
+First, check out my [basic server setup](setup/basic%20server%20setup). If you're new to self-hosting, there's a few tips in there to help with performance and security.
 
-Then, install the [base install](/base%20install) compose stack. It gives you 2 useful containers:
+Then, install the [base install](setup/base%20install) compose stack. It gives you 2 useful containers:
 
 - Portainer -- A GUI for managing docker containers
 - Nginx proxy manager -- A reverse proxy with a GUI and built in letsencrypt module for generating SSL certificates
@@ -29,57 +29,57 @@ Then, install the [base install](/base%20install) compose stack. It gives you 2 
 
 ### :construction_worker: Docker and reverse proxy management
 
-- [Portainer + Nginx proxy manager (base install)](/base%20install)
+- [Portainer + Nginx proxy manager (base install)](setup/base%20install)
 
 ### :book: Books
 
-- [Calibre-web](/calibre-web)
+- [Calibre-web](/containers/calibre-web)
 
 ### :placard: Dashboard
 
-- [Dashy](/dashy)
+- [Dashy](/containers/dashy)
 
 ### :chart_with_upwards_trend: Diagrams
 
-- [Draw.io](/draw-io)
+- [Draw.io](/containers/draw-io)
 
 ### :inbox_tray: RSS
 
-- [FreshRSS](/freshrss)
+- [FreshRSS](/containers/freshrss)
 
 ### :package: Inventory management
 
-- [HomeBox](/homebox)
+- [HomeBox](/containers/homebox)
 
 ### :shield: Alternative frontends
 
-- [Alexandrite (Lemmy)](/alexandrite)
-- [Libreddit (Reddit)](/libreddit)
-- [Viewtube (YouTube)](/viewtube)
+- [Alexandrite (Lemmy)](/containers/alexandrite)
+- [Libreddit (Reddit)](/containers/libreddit)
+- [Viewtube (YouTube)](/containers/viewtube)
 
 ### :open_file_folder: Storage and filesharing
 
-- [Nextcloud](/nextcloud)
-- [Snapdrop](/snapdrop)
+- [Nextcloud](/containers/nextcloud)
+- [Snapdrop](/containers/snapdrop)
 
 ### :clipboard: DNS
 
-- [Pihole](/pihole)
+- [Pihole](/containers/pihole)
 
 ### :eye: Monitoring
 
-- [Uptime Kuma](/uptime%20kuma)
+- [Uptime Kuma](/containers/uptime%20kuma)
 
 ### :desktop_computer: Websites and wikis
 
-- [Pico CMS](/pico-cms)
-- [WikiJS](/wikijs)
-- [Wordpress](/wordpress)
+- [Pico CMS](/containers/pico-cms)
+- [WikiJS](/containers/wikijs)
+- [Wordpress](/containers/wordpress)
 
 ### :earth_americas: Remote access
 
-- [Wg-easy (Wireguard GUI)](/wg-easy)
+- [Wg-easy (Wireguard GUI)](/containers/wg-easy)
 
 ### :notebook: Notes
 
-- [Memos](/memos)
+- [Memos](/containers/memos)
