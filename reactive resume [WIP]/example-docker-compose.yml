@@ -1,0 +1,125 @@
+version: "3.8"
+
+services:
+  # Database (Postgres)
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Storage (for image uploads)
+  minio:
+    # image: minio/minio:latest
+    image: minio/minio
+    restart: unless-stopped
+    # command: server --console-address ":9001" /data
+    command: server /data
+    ports:
+      - 9080:9000
+      - 9081:9001
+    volumes:
+      - minio_data:/data
+    environment:
+      MINIO_ADDRESS: :9000
+      MINIO_CONSOLE_ADDRESS: :9001
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+
+  # Chrome Browser (for printing and previews)
+  chrome:
+    image: browserless/chrome:1.61.0-puppeteer-21.4.1
+    restart: unless-stopped
+    environment:
+      # generated with `openssl rand -hex 32`
+      TOKEN: "d3f897e76179915771c716fe6284cae80be29801fa4f4db9f211e7fc5dfd4aa4"
+      EXIT_ON_HEALTH_FAILURE: "true"
+      PRE_REQUEST_HEALTH_CHECK: "true"
+
+  # Redis (for cache & server session management)
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    command: redis-server --requirepass password
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data:/data
+
+  app:
+    image: amruthpillai/reactive-resume:latest
+    restart: unless-stopped
+    ports:
+      - 3030:3000
+    depends_on:
+      - chrome
+      - minio
+      - postgres
+      - redis
+    environment:
+      # -- Environment Variables --
+      PORT: 3000
+      NODE_ENV: production
+
+      # -- URLs --
+      PUBLIC_URL: http://server.example.com:3030
+      STORAGE_URL: http://server.example.com:9080/default/
+
+      # -- Printer (Chrome) --
+      CHROME_TOKEN: chrome_token
+      CHROME_URL: ws://chrome:3000
+
+      # -- Database (Postgres) --
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/reactive_resumes
+
+      # -- Auth --
+      ACCESS_TOKEN_SECRET: access_token_secret
+      REFRESH_TOKEN_SECRET: refresh_token_secret
+
+      # -- Emails --
+      MAIL_FROM: resumes@example.com
+      SMTP_URL: smtp://email_user:email_password@email_server:587 # Optional
+
+      # -- Storage (Minio) --
+      STORAGE_ENDPOINT: minio
+      STORAGE_PORT: 9000
+      STORAGE_REGION: us-east-1 # Optional
+      STORAGE_BUCKET: default
+      STORAGE_ACCESS_KEY: minioadmin
+      STORAGE_SECRET_KEY: minioadmin
+      STORAGE_USE_SSL: "false"
+
+      # -- Cache (Redis) --
+      REDIS_URL: redis://default:password@redis:6379
+
+      # -- Email --
+      # DISABLE_EMAIL_AUTH: true
+
+volumes:
+  postgresql_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /opt/reactive_resume/postgresql_data
+      o: bind
+  minio_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /opt/reactive_resume/minio_data
+      o: bind
+  redis_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /opt/reactive_resume/redis_data
+      o: bind

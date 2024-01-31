@@ -1,0 +1,36 @@
+version: "3.8"
+
+# Define networks
+networks:
+# These networks get created by my base-install compose file. Remove them if you aren't using that.
+  frontend:
+    external: true
+
+# Create volumes
+volumes:
+  pico_config:
+    name: pico_config
+  pico_content:
+    name: pico_content
+  pico_plugins:
+    name: pico_plugins
+  pico_themes:
+    name: pico_themes
+
+# Create example containers
+services:
+  pico-cms:
+    container_name: pico-cms
+    image: mhzawadi/picocms:latest
+    restart: unless-stopped
+    volumes:
+      - pico_config:/var/www/html/config
+      - pico_content://var/www/html/content
+      - pico_plugins:/var/www/html/plugins
+      - pico_themes:/var/www/html/themes
+    networks:
+      - frontend
+    # ports:
+      # - 80:80 # Not required if using the base install
+    environment:
+      - TZ=America/Toronto
