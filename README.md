@@ -54,6 +54,7 @@ Then, install the [base install](/base%20install) compose stack. It gives you 2 
 ### :shield: Alternative frontends
 
 - [Libreddit](/libreddit)
+- [Viewtube](/viewtube)
 
 ### :open_file_folder: Storage and filesharing
 
@@ -70,6 +71,7 @@ Then, install the [base install](/base%20install) compose stack. It gives you 2 
 
 ### :desktop_computer: Websites and wikis
 
+- [Pico CMS](/pico-cms)
 - [WikiJS](/wikijs)
 - [Wordpress](/wordpress)
 
