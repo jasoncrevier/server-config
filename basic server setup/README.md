@@ -1,5 +1,5 @@
 # Basic Debian server setup
-This page walks through my typical Debian server environment.
+This page walks through the process for setting up a basic Debian server environment.
 
 Most of this will work on other Linux distributions, but you'll need to adapt it for your package manager / general setup.
 
@@ -12,7 +12,10 @@ Most of this will work on other Linux distributions, but you'll need to adapt it
 - [What's next?](#whats-next)
 
 ## Set up your environment
-I wrote a script that installs Docker along with a few important tools (and a few I just like) for using a headless Debian server. 
+
+I wrote a script that installs Docker along with a few important tools for using a headless Debian server. 
+
+Before running it, read it over and make sure you understand what it does. Find it here: [Debian setup script](debian_setup.sh)
 
 This script assumes you've finished installing Debian and that you set up a separate (non-root) user. Having a non-root user is good for security.
 
@@ -34,8 +37,6 @@ apt install git
 Then, clone this repo, and navigate to the folder with the script:
 ```bash
 git clone https://github.com/jasoncrevier/server-config
-```
-```bash
 cd server-config/basic\ server\ setup/
 ```
 Then, make the script executable:
@@ -48,8 +49,8 @@ Then, run the script:
 # Runs the script
 ```
 Then:
-- enter your username when it prompts you, and
-- press y.
+- Enter your username when it prompts you
+- Press Y.
 
 Lastly, log out of your server and log back in to apply docker and sudo access.
 
@@ -125,6 +126,43 @@ sudo apt install ufw
 ```
 
 ### Block all incoming ports by default
+Tell UFW to block all incoming ports and allow all outgoing ports with these commands:
+```bash
+sudo ufw default deny incoming
+sudo ufw allow outgoing
+```
+
+### Allow some required ports
+If you're setting up your server remotely over SSH, it's very important that you open your SSH port (the default is 22) in your firewall. If you don't, you'll lock yourself out when you enable it.
+
+Do that with this command:
+```bash
+sudo ufw allow 22
+```
+
+You'll probably also want to open ports for web traffic:
+```bash
+sudo ufw allow 80
+sudo ufw allow 443
+```
+If you're using my [base install](/base%20install) compose stack you'll also want to open the admin port for Nginx Proxy Manager:
+```bash
+sudo ufw allow 81
+```
+You can create an entry to redirect a domain to the admin page instead and close the port later:
+```bash
+sudo ufw deny 81
+```
+
+### Enable UFW
+Start UFW with this command:
+```bash
+sudo ufw enable
+```
+You can disable it with this command:
+```bash
+sudo ufw disable
+```
 
 [Back to top](#on-this-page)
 
@@ -170,33 +208,20 @@ In this example, I'm using 6.4Gb out of a total 49Gb -- plenty left over for swa
 
 ### Create a swap file
 
+Run this command:
 ```bash
 sudo fallocate -l 1G /swapfile
 ```
 
 ### Enable swap
 
+Run these commands:
 ```bash
 sudo chmod 600 /swapfile
-```
-
-```bash
 sudo mkswap /swapfile
-```
-
-```bash
 sudo swapon /swapfile
-```
-
-```bash
 sudo swapon --show
-```
-
-```bash
 sudo cp /etc/fstab /etc/fstab.backup
-```
-
-```bash
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 ```
 
