@@ -33,6 +33,7 @@ Then, install the [base install](setup/base%20install) compose stack. It gives y
 
 ### :book: Books
 
+- [Audiobookshelf](/containers/audiobookshelf/)
 - [Calibre-web](/containers/calibre-web)
 
 ### :placard: Dashboard
