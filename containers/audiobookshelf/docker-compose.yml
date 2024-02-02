@@ -1,0 +1,36 @@
+version: "3.8"
+
+# Define networks
+networks:
+# These networks get created by my base-install compose file. Remove them if you aren't using that.
+  frontend:
+    external: true
+
+# Create volumes
+volumes:
+  audiobookshelf_audiobooks:
+    name: audiobookshelf_audiobooks
+  audiobookshelf_podcasts:
+    name: audiobookshelf_podcasts
+  audiobookshelf_metadata:
+    name: audiobookshelf_metadata
+  audiobookshelf_config:
+    name: audiobookshelf_config
+
+# Create example containers
+services:
+  audiobookshelf:
+    container_name: audiobookshelf
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    restart: unless-stopped
+    volumes:
+      - audiobookshelf_audiobooks:/audio
+      - audiobookshelf_podcasts:/podcasts
+      - audiobookshelf_metadata:/metadata
+      - audiobookshelf_config:/config
+    networks:
+      - frontend
+    # ports:
+      # - 13378:13378 # Not required if using the base install
+    environment:
+      - TZ=America/Toronto
