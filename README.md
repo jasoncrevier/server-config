@@ -44,6 +44,10 @@ Then, install the [base install](setup/base%20install) compose stack. It gives y
 
 - [Draw.io](/containers/draw-io)
 
+### :arrow_down: Downloads
+
+- [YoutubeDL-Material](/containers/youtubedl-material)
+
 ### :inbox_tray: RSS
 
 - [FreshRSS](/containers/freshrss)
