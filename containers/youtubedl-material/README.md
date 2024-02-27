@@ -1,4 +1,4 @@
-# WordPress
+# YoutubeDL-Material
 
 YoutubeDL-Material is a Material Design frontend for youtube-dl, a command-line program to download videos from YouTube.com and a few more sites.
 
