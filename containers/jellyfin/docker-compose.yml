@@ -1,0 +1,38 @@
+version: "3.8"
+
+# Define networks
+networks:
+# These networks get created by my base-install compose file. Remove them if you aren't using that.
+  frontend:
+    external: true
+  backend:
+    external: true
+
+# Create volumes
+volumes:
+  jellyfin_config:
+    name: jellyfin_config
+  jellyfin_cache:
+    name: jellyfin_cache
+# Create Jellyfin container
+services:
+  jellyfin:
+    container_name: jellyfin
+    image: jellyfin/jellyfin:latest
+    restart: unless-stopped
+    volumes:
+      - jellyfin_config:/config
+      - jellyfin_cache:/cache
+      - type: bind
+        source: /media/media_drive/tv_shows
+        target: /tv
+      - type: bind
+        source: /media/media_drive/movies
+        target: /movies
+    networks:
+      - frontend
+      - backend
+    # ports:
+      # - 8096:8096 # Not required if using the base install
+    environment:
+      - TZ=America/Toronto
