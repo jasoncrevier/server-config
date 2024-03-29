@@ -12,17 +12,15 @@ networks:
 volumes:
   jellyfin_config:
     name: jellyfin_config
-  jellyfin_cache:
-    name: jellyfin_cache
+
 # Create Jellyfin container
 services:
   jellyfin:
     container_name: jellyfin
-    image: jellyfin/jellyfin:latest
+    image: lscr.io/linuxserver/jellyfin:latest
     restart: unless-stopped
     volumes:
       - jellyfin_config:/config
-      - jellyfin_cache:/cache
       - type: bind
         source: /media/media_drive/tv_shows
         target: /tv
