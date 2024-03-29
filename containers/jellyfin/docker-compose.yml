@@ -22,7 +22,7 @@ services:
     volumes:
       - jellyfin_config:/config
       - type: bind
-        source: /media/media_drive/tv_shows
+        source: /media/media_drive/tv
         target: /tv
       - type: bind
         source: /media/media_drive/movies
