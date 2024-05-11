@@ -129,7 +129,7 @@ sudo apt install ufw
 Tell UFW to block all incoming ports and allow all outgoing ports with these commands:
 ```bash
 sudo ufw default deny incoming
-sudo ufw allow outgoing
+sudo ufw default allow outgoing
 ```
 
 ### Allow some required ports
