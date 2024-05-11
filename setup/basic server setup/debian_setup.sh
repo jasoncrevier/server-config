@@ -2,7 +2,7 @@
 
 #---
 # Log into your server and run "su -" to switch to root
-# Run "apt install git -y && git clone https://github.com/jasoncrevier/server-config && cd server-config/basic\ server\ setup/ && chmod u+x debian_setup.sh && ./debian_setup.sh"
+# Run "apt install git -y && git clone https://github.com/jasoncrevier/server-config && cd server-config/setup/basic\ server\ setup/ && chmod u+x debian_setup.sh && ./debian_setup.sh"
 # Log out and back in when the script completes
 #--- 
 
