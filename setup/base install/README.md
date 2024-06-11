@@ -6,7 +6,7 @@ This folder contains a compose file that sets up Nginx Proxy Manager and Portain
 Clone this repo and navigate to the base install folder:
 ```bash
 git clone https://github.com/jasoncrevier/server-config
-cd server-config/setup/basic\ server\ setup/base\ install/
+cd server-config/setup/base\ install/
 ```
 
 Then run the compose stack:
