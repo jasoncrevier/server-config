@@ -80,6 +80,7 @@ Then, install the [base install](setup/base%20install) compose stack. It gives y
 - [Pico CMS](/containers/pico-cms)
 - [WikiJS](/containers/wikijs)
 - [Wordpress](/containers/wordpress)
+- [ghost](/containers/ghost)
 
 ### :computer: Coding
 
