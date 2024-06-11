@@ -3,4 +3,4 @@
 A free, self-hostable feed aggregator.
 
 ## Learn more
-- [FreshRSS website](https://freshrss.org/index.html)
+- [FreshRSS website](https://freshrss.org)

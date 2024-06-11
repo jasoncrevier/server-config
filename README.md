@@ -81,6 +81,10 @@ Then, install the [base install](setup/base%20install) compose stack. It gives y
 - [WikiJS](/containers/wikijs)
 - [Wordpress](/containers/wordpress)
 
+### :computer: Coding
+
+- [Forgejo](/containers/forgejo)
+
 ### :earth_americas: Remote access
 
 - [Wg-easy (Wireguard GUI)](/containers/wg-easy)
