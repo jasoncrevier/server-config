@@ -22,6 +22,8 @@ volumes:
     name: ytdl_material_users
   ytdl_material_db:
     name: ytdl_material_db
+  ytdl_material_db_config:
+    name: ytdl_material_db_config
 
 # Create ytdl_material
 services:
@@ -52,6 +54,7 @@ services:
     restart: unless-stopped
     volumes:
       - ytdl_material_db:/data/db
+      - ytdl_material_db_config:/data/configdb
     networks:
       - backend
     # ports:
