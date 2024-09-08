@@ -59,7 +59,7 @@ Then, install the [base install](setup/base%20install) compose stack. It gives y
 ### :shield: Alternative frontends
 
 - [Alexandrite (Lemmy)](/containers/alexandrite)
-- [Libreddit (Reddit)](/containers/libreddit)
+- [Redlib (Reddit)](/containers/redlib)
 - [Viewtube (YouTube)](/containers/viewtube)
 
 ### :open_file_folder: Storage and filesharing
