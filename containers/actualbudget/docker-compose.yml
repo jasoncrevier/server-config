@@ -1,0 +1,30 @@
+version: "3.8"
+
+# Define networks
+networks:
+# These networks get created by my base-install compose file. Remove them if you aren't using that.
+  frontend:
+    external: true
+  backend:
+    external: true
+
+# Create volumes
+volumes:
+  actualbudget_data:
+    name: actualbudget_data
+
+# Create example containers
+services:
+  actualbudget:
+    container_name: actualbudget
+    image: docker.io/actualbudget/actual-server:latest
+    restart: unless-stopped
+    volumes:
+      - actualbudget_data:/data
+    networks:
+      - frontend
+    # ports:
+      # - 5006:5006 # Not required if using the base install
+    environment:
+      - TZ=America/Toronto
+      - trustedProxies=["nginx_proxy_manager"]

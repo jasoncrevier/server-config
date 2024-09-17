@@ -36,11 +36,15 @@ Then, install the [base install](setup/base%20install) compose stack. It gives y
 - [Audiobookshelf](/containers/audiobookshelf/)
 - [Calibre-web](/containers/calibre-web)
 
+### :chart_with_upwards_trend: Budgeting
+
+- [Actual](/containers/actualbudget/)
+
 ### :placard: Dashboard
 
 - [Dashy](/containers/dashy)
 
-### :chart_with_upwards_trend: Diagrams
+### :bar_chart: Diagrams
 
 - [Draw.io](/containers/draw-io)
 
