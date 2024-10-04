@@ -1,5 +1,3 @@
-version: "3.8"
-
 # Define networks
 networks:
 # These networks get created by my base-install compose file. Remove them if you aren't using that.
