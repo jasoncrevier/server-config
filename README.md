@@ -63,6 +63,7 @@ Then, install the [base install](setup/base%20install) compose stack. It gives y
 ### :shield: Alternative frontends
 
 - [Alexandrite (Lemmy)](/containers/alexandrite)
+- [Photon (Lemmy)](/containers/photon)
 - [Redlib (Reddit)](/containers/redlib)
 - [Viewtube (YouTube)](/containers/viewtube)
 

@@ -1,0 +1,20 @@
+version: "3.8"
+
+# Define networks
+networks:
+# These networks get created by my base-install compose file. Remove them if you aren't using that.
+  frontend:
+    external: true
+
+# Create photon container
+services:
+  photon:
+    container_name: photon
+    image: ghcr.io/xyphyn/photon:latest
+    restart: unless-stopped
+    networks:
+      - frontend
+    # ports:
+      # - 3000:3000 # Not required if using the base install
+    environment:
+      - TZ=America/Toronto
