@@ -59,6 +59,7 @@ Then, install the [base install](setup/base%20install) compose stack. It gives y
 ### :package: Inventory management
 
 - [HomeBox](/containers/homebox)
+- [KitchenOwl](/containers/kitchenowl)
 
 ### :shield: Alternative frontends
 

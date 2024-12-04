@@ -1,0 +1,25 @@
+# Define networks
+networks:
+# These networks get created by my base-install compose file. Remove them if you aren't using that.
+  frontend:
+    external: true
+
+# Create volumes
+volumes:
+  kitchenowl_data:
+    name: kitchenowl_data
+
+# Create example containers
+services:
+  kitchenowl:
+    container_name: kitchenowl
+    image: tombursch/kitchenowl:latest
+    restart: unless-stopped
+    volumes:
+      - kitchenowl_data:/data
+    networks:
+      - frontend
+    # ports:
+      # - 80:8080 # Not required if using the base install
+    environment:
+      - JWT_SECRET_KEY=PLEASE_CHANGE_ME
