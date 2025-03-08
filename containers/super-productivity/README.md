@@ -1,7 +1,7 @@
-# OpenSupports
+# Super Productivity
 
-Simple open source ticket system 
+Simply free your mind. Put a task into your project for today or schedule it to another day to keep your head free.
 
 ## Learn more
-- [OpenSupports website](https://www.opensupports.com/)
-- [OpenSupports Github](https://github.com/opensupports/opensupports)
+- [Super Productivity website](https://super-productivity.com/)
+- [Super Productivity Github](https://github.com/johannesjo/super-productivity)
