@@ -1,0 +1,43 @@
+# Define networks
+networks:
+# These networks get created by my base-install compose file. Remove them if you aren't using that.
+  frontend:
+    external: true
+
+# Create volumes
+volumes:
+  opensupports_config:
+    name: opensupports_config
+  opensupports_db_data:
+    name: opensupports_db_data
+
+# Create opensupports and opensupports_db containers
+services:
+  opensupports:
+    container_name: opensupports
+    image: gamelaster/opensupports:latest
+    restart: unless-stopped
+    volumes:
+      - opensupports_config:/config
+    networks:
+      - frontend
+    # ports:
+      # - 5543:80 # Not required if using the base install
+    environment:
+      - TZ=America/Toronto
+    depends_on:
+      - opensupports_db
+
+  opensupports_db:
+    container_name: opensupports_db
+    image: mariadb
+    restart: unless-stopped
+    volumes:
+      - opensupports_db_data:/var/lib/mysql
+    networks:
+      - frontend
+    environment:
+     - MYSQL_USER=opensupports
+     - MYSQL_PASSWORD=changeme
+     - MYSQL_DATABASE=opensupports
+     - MYSQL_RANDOM_ROOT_PASSWORD=true

@@ -1,0 +1,37 @@
+# Define networks
+networks:
+# These networks get created by my base-install compose file. Remove them if you aren't using that.
+  frontend:
+    external: true
+
+# Create volumes
+volumes:
+  super-productivity_webdav_config:
+    name: super-productivity_webdav_config
+  super-productivity_webdav_data:
+    name: super-productivity_webdav_data
+
+# Create super-productivity and super-productivity_webdav containers
+services:
+  super-productivity:
+    container_name: super-productivity
+    image: johannesjo/super-productivity:latest
+    restart: unless-stopped
+    networks:
+      - frontend
+    # ports:
+      # - 80:80 # Not required if using the base install
+    environment:
+      - WEBDAV_BACKEND=http://webdav # Optional
+
+  # Optional: WebDAV backend server
+  # (used with the WEBDAV_BACKEND environment variable)
+  super-productivity_webdav:
+    container_name: super-productivity_webdav
+    image: hacdias/webdav:latest
+    restart: unless-stopped
+    volumes:
+      - super-productivity_webdav_config:/config.yml:ro
+      - super-productivity_webdav_data:/data
+    networks:
+      - frontend

@@ -98,3 +98,8 @@ Then, install the [base install](setup/base%20install) compose stack. It gives y
 ### :notebook: Notes
 
 - [Memos](/containers/memos)
+
+### :bookmark_tabs: Productivity
+
+- [OpenSupports](/containers/opensupports/)
+- [Super Productivity](/containers/super-productivity/)
