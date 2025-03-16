@@ -102,5 +102,9 @@ Then, install the [base install](setup/base%20install) compose stack. It gives y
 
 ### :bookmark_tabs: Productivity
 
-- [OpenSupports](/containers/opensupports/)
-- [Super Productivity](/containers/super-productivity/)
+- [OpenSupports](/containers/opensupports)
+- [Super Productivity](/containers/super-productivity)
+
+### Wishlists
+- [Wishlist](/containers/wishlist)
+- [wishthis](/containers/wishthis)

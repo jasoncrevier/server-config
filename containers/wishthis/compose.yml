@@ -1,0 +1,45 @@
+# Define networks
+networks:
+# This network gets created by my base-install compose file. Remove it if you aren't using that.
+  frontend:
+    external: true
+  backend:
+    external: true
+
+# Create volumes
+volumes:
+  wishthis_db_data:
+    name: wishthis_db_data
+
+# Create wishthis and wishthis_db containers
+services:
+  wishthis:
+    container_name: wishthis
+    image: hiob/wishthis:stable
+    restart: always
+    networks:
+      - frontend
+      - backend
+    # ports:
+      # - 80:80 # Not required if using the base install
+    environment:
+      - TZ=America/Toronto
+      - VIRTUAL_HOST=example.domain # Replace with your URL
+    depends_on:
+      - wishthis_db
+
+  wishthis_db:
+    container_name: wishthis_db
+    image: mariadb
+    restart: always
+    volumes:
+      - wishthis_db_data:/var/lib/mysql
+    networks:
+      - backend
+    # ports:
+      # - 3306:3306 # Not required if using the base install
+    environment:
+      - MARIADB_ROOT_PASSWORD=rootpassword
+      - MARIADB_DATABASE=databasename
+      - MARIADB_USER=username
+      - MARIADB_PASSWORD=userpassword
