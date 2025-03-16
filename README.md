@@ -105,6 +105,6 @@ Then, install the [base install](setup/base%20install) compose stack. It gives y
 - [OpenSupports](/containers/opensupports)
 - [Super Productivity](/containers/super-productivity)
 
-### Wishlists
+### :spiral_notepad: Wishlists
 - [Wishlist](/containers/wishlist)
 - [wishthis](/containers/wishthis)
