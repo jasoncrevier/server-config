@@ -96,6 +96,9 @@ Then, install the [base install](setup/base%20install) compose stack. It gives y
 
 - [Wg-easy (Wireguard GUI)](/containers/wg-easy)
 
+### :speech_balloon: Voice Chat
+- [Mumble](/containers/mumble)
+
 ### :notebook: Notes
 
 - [Memos](/containers/memos)

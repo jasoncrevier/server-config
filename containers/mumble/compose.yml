@@ -1,0 +1,27 @@
+# Define networks
+networks:
+# This network gets created by my base-install compose file. Remove it if you aren't using that.
+  frontend:
+    external: true
+
+# Create volumes
+volumes:
+  mumble_data:
+    name: mumble_data
+
+# Create mumble-server container
+services:
+  mumble-server:
+    container_name: mumble-server
+    image: mumblevoip/mumble-server:latest
+    restart: unless-stopped
+    volumes:
+      - mumble_data:/data
+    networks:
+      - frontend
+    ports:
+      - "64738:64738/tcp"
+      - "64738:64738/udp"
+    environment:
+      - TZ=America/Toronto
+      - MUMBLE_SUPERUSER_PASSWORD=PLEASE_CHANGE_ME # IMPORTANT: Change this to a strong password
