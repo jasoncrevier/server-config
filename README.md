@@ -55,6 +55,7 @@ Then, install the [base install](setup/base%20install) compose stack. It gives y
 ### :inbox_tray: RSS
 
 - [FreshRSS](/containers/freshrss)
+- [RSS-Bridge](/containers/rss-bridge)
 
 ### :package: Inventory management
 
